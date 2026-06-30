@@ -1,5 +1,5 @@
 /**
- * Sector / category chip — the blueprint's mono pill.
+ * Sector / category chip - the blueprint's mono pill.
  * `tone` tints it for the shared spine (default), consultancy, or products.
  */
 export function TrustPill({

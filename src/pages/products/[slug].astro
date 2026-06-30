@@ -40,22 +40,6 @@ export function getStaticPaths() {
       metricNote: "Time recovered from hunting for material you already had.",
     },
     {
-      slug: "tender-intel",
-      name: "Tender Intel",
-      job: "market radar",
-      headline: "See the opportunities before your rivals do.",
-      lede: "Tender Intel reads the procurement pipeline for you, surfacing and triaging the opportunities that fit, early enough to act.",
-      jobHeading: "The job",
-      jobBody: [
-        "By the time a tender hits your inbox, the well-prepared competitor has been shaping it for weeks. The advantage is in seeing the pipeline early, but the pipeline is vast, noisy and spread across dozens of portals.",
-        "Tender Intel watches the EU and public-sector pipeline and brings the relevant opportunities to you, triaged and ranked, so you spend your time on the ones worth winning.",
-      ],
-      features: ["Monitors EU & public-sector pipelines", "Filters to what's actually relevant", "Early signal, not last-minute scramble"],
-      metric: "EU-wide",
-      metricLabel: "pipeline coverage",
-      metricNote: "Public-sector opportunity, watched at the scale buyers operate.",
-    },
-    {
       slug: "cvinsight",
       name: "CVInsight",
       job: "CV evaluation",
@@ -92,7 +76,7 @@ const p = Astro.props;
     ctaHref="/contact"
   />
 
-  <!-- The job — prose (keeps the page's one eyebrow) -->
+  <!-- The job - prose (keeps the page's one eyebrow) -->
   <section class="bg-paper">
     <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
       <SectionLabel text={p.jobHeading} tone="product" class="mb-8" />
@@ -102,7 +86,7 @@ const p = Astro.props;
     </div>
   </section>
 
-  <!-- Shown running — split list + labeled product slot (no eyebrow) -->
+  <!-- Shown running - split list + labeled product slot (no eyebrow) -->
   <section class="bg-surface border-y border-line">
     <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
       <h2 class="text-[26px] md:text-[32px] mb-10">Shown running.</h2>
@@ -122,7 +106,7 @@ const p = Astro.props;
     </div>
   </section>
 
-  <!-- Proof — number-first dark band (no eyebrow) -->
+  <!-- Proof - number-first dark band (no eyebrow) -->
   <section class="mesh-spine">
     <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
       <div class="grid md:grid-cols-[200px_1fr] gap-6 md:gap-12 items-center reveal">

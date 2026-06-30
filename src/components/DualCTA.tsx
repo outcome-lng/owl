@@ -9,7 +9,7 @@ interface DualCTAProps {
 }
 
 /**
- * The "two doors" CTA band — closes most pages. Consultancy (teal) on the
+ * The "two doors" CTA band - closes most pages. Consultancy (teal) on the
  * left, Products (terracotta) on the right, on the ink ground.
  */
 export function DualCTA({
@@ -20,7 +20,7 @@ export function DualCTA({
 }: DualCTAProps) {
   return (
     <section className="mesh-spine relative overflow-hidden">
-      {/* Faint owl watermark — brand texture on the dark close */}
+      {/* Faint owl watermark - brand texture on the dark close */}
       <img
         src={withBase("/owl.png")}
         alt=""

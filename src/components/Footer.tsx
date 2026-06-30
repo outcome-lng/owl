@@ -36,7 +36,7 @@ export function Footer() {
             <p className="text-[14px] leading-relaxed mb-5 max-w-xs">
               Built to win the work that's hard to win. AI advisory, bid support and the OWL toolset.
             </p>
-            {/* PLACEHOLDER_CONTACT_EMAIL — confirm address before launch */}
+            {/* PLACEHOLDER_CONTACT_EMAIL - confirm address before launch */}
             <a href="mailto:hello@outcomeworks.co.uk" className="text-[14px] hover:text-white transition-colors">
               hello@outcomeworks.co.uk
             </a>

@@ -4,26 +4,26 @@ import { Button } from "../../components/Button";
 
 // Tender Intel is a member of the OWL suite, but its scope (an eleven-year EU
 // procurement corpus, two-schema reconciliation, forecasting) warrants a richer
-// page than the standard JTBD [slug] template — same pattern as Cadre.
+// page than the standard JTBD [slug] template - same pattern as Cadre.
 
 const heroChips = [
   "EU TED · every notice",
-  "2016–2026 · 7.15M notices",
+  "2016-2026 · 7.15M notices",
   "eForms + legacy TED-XML · CPV / NUTS",
 ];
 
 const constraints = [
-  { k: "7.15M", label: "Notices indexed", v: "Eleven years of EU procurement — every TED notice parsed, normalised and full-text searchable in one place, not scattered across portals." },
+  { k: "7.15M", label: "Notices indexed", v: "Eleven years of EU procurement - every TED notice parsed, normalised and full-text searchable in one place, not scattered across portals." },
   { k: "2 schemas", label: "A moving target", v: "TED switched from legacy XML to eForms in late 2022, and the two co-exist for years. Most tools read one. Tender Intel reconciles both into a single model." },
   { k: "Weeks", label: "The head start", v: "By the time a tender lands in your inbox, a prepared competitor has been shaping the requirement for weeks. The edge is in the pipeline, not the deadline." },
-  { k: "±1%", label: "Numbers you can trust", v: "Monthly counts and contract values cross-validate to within one percent of TED's own published figures — foresight you can take to a board." },
+  { k: "±1%", label: "Numbers you can trust", v: "Monthly counts and contract values cross-validate to within one percent of TED's own published figures - foresight you can take to a board." },
 ];
 
 const powers = [
   {
     role: "Bronze · captured once", title: "Ingests",
     points: [
-      "Original TED packages stored untouched — the only thing ever fetched from source",
+      "Original TED packages stored untouched - the only thing ever fetched from source",
       "Captured once, never re-downloaded: an immutable record of what was published",
       "Parse failures isolate and retry, they never halt the run",
     ],
@@ -32,7 +32,7 @@ const powers = [
   {
     role: "Silver · reconciled", title: "Normalises",
     points: [
-      "Two parsers — legacy TED-XML and eForms — fold into one normalised model",
+      "Two parsers - legacy TED-XML and eForms - fold into one normalised model",
       "Schema detected per file; older notices leave new fields null, queries tolerate it",
       "Values held in both original currency and EUR at the ECB fixing on publication",
     ],
@@ -52,8 +52,8 @@ const powers = [
 const flow = ["Capture", "Parse", "Normalise", "Index", "Match", "Rank", "Alert", "Forecast"];
 
 const platform = [
-  { role: "Config, not code", title: "A profile per client", body: "Every business is a YAML profile — target CPV codes, countries, value bands and keywords. Adding a client is adding a file, never a new code path." },
-  { role: "Scheduled", title: "Digests that arrive triaged", body: "Per-profile email digests on your schedule, so the relevant opportunities land in the inbox already filtered and ranked — no logging in to check." },
+  { role: "Config, not code", title: "A profile per client", body: "Every business is a YAML profile - target CPV codes, countries, value bands and keywords. Adding a client is adding a file, never a new code path." },
+  { role: "Scheduled", title: "Digests that arrive triaged", body: "Per-profile email digests on your schedule, so the relevant opportunities land in the inbox already filtered and ranked - no logging in to check." },
   { role: "Interactive", title: "Search, map and watch", body: "Full-text notice search with hierarchical CPV filtering, a market map of who buys what, and buyer-watch feeds for the organisations you track." },
 ];
 
@@ -63,7 +63,7 @@ const regs = [
   { art: "eForms + TED-XML", label: "Both schemas", desc: "Notices from 2014 onward in either schema, deduplicated on the TED publication number so nothing is double-counted across the changeover." },
   { art: "EUR", label: "Currency", desc: "Every value stored in both its original currency and EUR, converted at the ECB monthly fixing on the publication date." },
   { art: "Notice types", label: "Classification", desc: "CN, PIN, CAN, DPS, framework and qualification-system notices classified per the EU directives, not guessed from keywords." },
-  { art: "GDPR", label: "Privacy by construction", desc: "Only the contact email domain is ever stored — never the full address, name or phone. Personal data is designed out, not deleted later." },
+  { art: "GDPR", label: "Privacy by construction", desc: "Only the contact email domain is ever stored - never the full address, name or phone. Personal data is designed out, not deleted later." },
 ];
 
 const frameworks = [
@@ -74,7 +74,7 @@ const frameworks = [
 ];
 
 const stats = [
-  { n: "7.15M", label: "Notices indexed", body: "Every TED notice from 2016 to today — parsed, normalised and searchable in seconds." },
+  { n: "7.15M", label: "Notices indexed", body: "Every TED notice from 2016 to today - parsed, normalised and searchable in seconds." },
   { n: "±1%", label: "Cross-validated", body: "Monthly counts and values reconciled against TED's own published CSVs, country by country." },
   { n: "EU-wide", label: "Every member state", body: "The whole single market's public procurement, watched at the scale buyers operate." },
 ];
@@ -93,7 +93,7 @@ const archFoot = ["TED, the official EU source", "Idempotent, reproducible rebui
 
 <Base
   title="Tender Intel · OWL suite · Outcome Works"
-  description="Tender Intel reads the entire EU public-procurement pipeline — eleven years deep, updated daily — and surfaces the opportunities that fit your business early enough to shape them. Two-schema corpus, cross-validated to ±1%, forecasting built in."
+  description="Tender Intel reads the entire EU public-procurement pipeline - eleven years deep, updated daily - and surfaces the opportunities that fit your business early enough to shape them. Two-schema corpus, cross-validated to ±1%, forecasting built in."
 >
   <!-- HERO -->
   <section class="mesh-spine relative overflow-hidden">
@@ -102,7 +102,7 @@ const archFoot = ["TED, the official EU source", "Idempotent, reproducible rebui
       <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-product-bright mb-5">OWL suite · Tender Intel</div>
       <h1 class="max-w-[18ch] text-white">See every EU public tender, <span class="italic text-product-bright">ranked for you</span>, the day it publishes.</h1>
       <p class="mt-6 text-[clamp(17px,2vw,20px)] text-white/70 leading-relaxed max-w-[60ch]">
-        Tender Intel reads the whole European procurement pipeline — eleven years deep and updated daily — and brings you the opportunities that fit your business, triaged and ranked, early enough to actually shape them.
+        Tender Intel reads the whole European procurement pipeline - eleven years deep and updated daily - and brings you the opportunities that fit your business, triaged and ranked, early enough to actually shape them.
       </p>
       <div class="flex flex-wrap gap-2.5 mt-8">
         {heroChips.map((c) => (
@@ -120,7 +120,7 @@ const archFoot = ["TED, the official EU source", "Idempotent, reproducible rebui
     <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
       <div class="max-w-[680px] mb-12">
         <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-product mb-4">The challenge</div>
-        <h2 class="text-[26px] md:text-[34px]">The pipeline is the advantage — and it's drowning you.</h2>
+        <h2 class="text-[26px] md:text-[34px]">The pipeline is the advantage - and it's drowning you.</h2>
         <p class="text-[17px] text-muted leading-relaxed mt-5">
           EU public procurement is enormous, fragmented and constantly changing format. The opportunity is in seeing it early and reading it clearly, but the raw feed is noise, spread across years of incompatible standards.
         </p>
@@ -177,7 +177,7 @@ const archFoot = ["TED, the official EU source", "Idempotent, reproducible rebui
     <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
       <div class="max-w-[680px] mb-10">
         <h2 class="text-[26px] md:text-[34px]">From a raw notice to a ranked opportunity.</h2>
-        <p class="text-[17px] text-muted leading-relaxed mt-5">The same pipeline runs every day — capture, parse, normalise, index, then match against the profiles that describe your business.</p>
+        <p class="text-[17px] text-muted leading-relaxed mt-5">The same pipeline runs every day - capture, parse, normalise, index, then match against the profiles that describe your business.</p>
       </div>
       <div class="flex flex-wrap items-center gap-2 reveal">
         {flow.map((step, i) => (
@@ -262,7 +262,7 @@ const archFoot = ["TED, the official EU source", "Idempotent, reproducible rebui
       </div>
       <div class="mt-12 rounded-lg border border-white/12 bg-white/[0.03] p-6 md:p-7 max-w-[800px] reveal">
         <p class="text-[15.5px] text-white/75 leading-relaxed">
-          <strong class="text-white font-semibold">Live, and tuned to your business.</strong> Profiles, digests and dashboards are configured to your sectors, codes and target buyers. The corpus updates daily, and rebuilds itself idempotently from the raw record whenever a parser improves — so history gets more accurate, never stale.
+          <strong class="text-white font-semibold">Live, and tuned to your business.</strong> Profiles, digests and dashboards are configured to your sectors, codes and target buyers. The corpus updates daily, and rebuilds itself idempotently from the raw record whenever a parser improves - so history gets more accurate, never stale.
         </p>
       </div>
     </div>
@@ -283,7 +283,7 @@ const archFoot = ["TED, the official EU source", "Idempotent, reproducible rebui
         ))}
       </div>
       <p class="text-[16px] text-muted leading-relaxed max-w-[760px]">
-        Analytics run on <strong class="text-ink font-semibold">DuckDB reading Parquet directly from R2</strong>, so there's no separate warehouse to feed or fund. Raw packages, normalised Parquet and aggregated marts live as three layers in object storage, each idempotently rebuildable from the one beneath — and the full corpus stream-parses without ever staging a terabyte of XML to disk.
+        Analytics run on <strong class="text-ink font-semibold">DuckDB reading Parquet directly from R2</strong>, so there's no separate warehouse to feed or fund. Raw packages, normalised Parquet and aggregated marts live as three layers in object storage, each idempotently rebuildable from the one beneath - and the full corpus stream-parses without ever staging a terabyte of XML to disk.
       </p>
       <div class="flex flex-wrap gap-x-7 gap-y-3 mt-7">
         {archFoot.map((f) => (

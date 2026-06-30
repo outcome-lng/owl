@@ -3,9 +3,9 @@ import { useState } from "react";
 /**
  * Dual-path contact form. Until a real endpoint (Formspree / Resend) is wired,
  * it falls back to opening the visitor's mail client with a pre-filled message.
- * PLACEHOLDER_FORM_ENDPOINT — replace the handleSubmit target before launch.
+ * PLACEHOLDER_FORM_ENDPOINT - replace the handleSubmit target before launch.
  */
-const CONTACT_EMAIL = "hello@outcomeworks.co.uk"; // PLACEHOLDER_CONTACT_EMAIL — confirm
+const CONTACT_EMAIL = "hello@outcomeworks.co.uk"; // PLACEHOLDER_CONTACT_EMAIL - confirm
 
 export function ContactForm() {
   const [interest, setInterest] = useState("Consultancy enquiry");

@@ -23,7 +23,7 @@ export function Navbar() {
     const path = window.location.pathname;
     setLocation(BASE && path.startsWith(BASE) ? path.slice(BASE.length) || "/" : path);
 
-    // Scroll state via a 1px sentinel + IntersectionObserver — no scroll listener.
+    // Scroll state via a 1px sentinel + IntersectionObserver - no scroll listener.
     const sentinel = document.createElement("div");
     sentinel.setAttribute("aria-hidden", "true");
     sentinel.style.cssText = "position:absolute;top:0;left:0;height:24px;width:1px;pointer-events:none;";

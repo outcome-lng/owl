@@ -13,7 +13,7 @@ interface DoorCardProps {
 /**
  * The signature "two doors" fork card. Door A = consultancy (teal),
  * Door B = products (terracotta). Used in the home hero and as a chooser
- * elsewhere. Renders statically — no client JS.
+ * elsewhere. Renders statically - no client JS.
  */
 export function DoorCard({ variant, eyebrow, title, body, ctaLabel, href }: DoorCardProps) {
   const isConsult = variant === "consult";

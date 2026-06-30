@@ -6,7 +6,7 @@ const BASE = import.meta.env.BASE_URL;
  * like `https://lng-boomworks.github.io/<slug>/`.
  *
  * Pass-through for absolute URLs and non-"/"-leading values. Every internal
- * <a href> and image/favicon path in this template must go through here —
+ * <a href> and image/favicon path in this template must go through here -
  * Astro does not auto-prefix href values, so raw "/services" would 404 in
  * production when `base` is set.
  */

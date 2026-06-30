@@ -10,7 +10,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ============================================================
-   Outcome Works — "One brand, two doors" design system
+   Outcome Works - "One brand, two doors" design system
    Teal  = consultancy (Door A) · Terracotta = products (Door B)
    Slate = shared spine · Paper background · Ink text
    Type  = Space Grotesk (display + body) · IBM Plex Mono (labels)
@@ -18,7 +18,7 @@
    ============================================================ */
 
 @theme inline {
-  /* Neutrals — calm, trust-first, faintly cool */
+  /* Neutrals - calm, trust-first, faintly cool */
   --color-paper: #ECEFF2;
   --color-surface: #FFFFFF;
   --color-sunken: #E3E8EC;
@@ -28,18 +28,18 @@
   --color-line: #CDD5DC;
   --color-hairline: #DDE3E9;
 
-  /* Master brand — the owl: navy body + cyan wing (sampled from owl.png) */
+  /* Master brand - the owl: navy body + cyan wing (sampled from owl.png) */
   --color-brand-navy: #06395B;
   --color-brand-cyan: #179EB2;
 
-  /* Door A — consultancy. Retuned toward the owl's wing cyan so the logo and
+  /* Door A - consultancy. Retuned toward the owl's wing cyan so the logo and
      the consultancy door share one teal (consult stays dark enough for white
-     text — WCAG AA). */
+     text - WCAG AA). */
   --color-consult: #15727C;
   --color-consult-wash: #DCEDEF;
   --color-consult-bright: #36A9BC;
 
-  /* Door B — products (terracotta counterpoint, unchanged) */
+  /* Door B - products (terracotta counterpoint, unchanged) */
   --color-product: #C2562F;
   --color-product-wash: #F6E6DE;
   --color-product-bright: #E5916C;
@@ -111,7 +111,7 @@
 }
 
 @layer components {
-  /* Mono eyebrow / kicker — rationed. Genuine labels only. */
+  /* Mono eyebrow / kicker - rationed. Genuine labels only. */
   .kicker {
     @apply font-mono uppercase text-muted;
     font-size: 11.5px;
@@ -126,7 +126,7 @@
     max-width: 56ch;
   }
 
-  /* Corner-bracketed frame — masthead motif */
+  /* Corner-bracketed frame - masthead motif */
   .framed {
     position: relative;
   }
