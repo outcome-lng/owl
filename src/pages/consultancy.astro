@@ -1,0 +1,114 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import SectionLabel from "../components/SectionLabel.astro";
+import { CaseMetric } from "../components/CaseMetric";
+import { TrustPill } from "../components/TrustPill";
+import { DualCTA } from "../components/DualCTA";
+
+const services = [
+  {
+    name: "AI Advisory",
+    tag: "strategy · practical AI",
+    body: "Cut through the noise. We help leadership teams decide where AI actually moves the needle, and where it doesn't, then turn that into a plan your people can execute. Pragmatic, evidence-led, and grounded in what we've shipped ourselves.",
+    outcomes: ["A clear, costed AI roadmap", "Capability your team keeps", "No hype, no lock-in"],
+  },
+  {
+    name: "Bid & Proposal Support",
+    tag: "tender response · win strategy",
+    body: "We sit alongside your bid team for the work that's hard to win. Win strategy, response architecture, writing, and review, sharpened by the same tooling we build. We've helped a two-person team triple its tender throughput without dropping quality.",
+    outcomes: ["More tenders answered, better", "A repeatable response engine", "Higher win rates on the bids that matter"],
+  },
+  {
+    name: "Enterprise Tooling",
+    tag: "bespoke builds",
+    body: "When the tool you need doesn't exist, we build it. Bespoke software for procurement, evaluation and delivery, built to enterprise and public-sector standards, and trustworthy with sensitive work.",
+    outcomes: ["Software that fits your process", "Built for security & compliance", "Owned by you"],
+  },
+];
+
+const steps = [
+  { t: "Scope", d: "A focused conversation about the outcome you need and the deadline you're working to." },
+  { t: "Shape", d: "We design the engagement, advisory, hands-on delivery, or a build, and agree what 'won' looks like." },
+  { t: "Deliver", d: "We work alongside your team, not at arm's length, and leave capability behind." },
+  { t: "Sustain", d: "Optionally, the OWL suite keeps the gains running after we step back." },
+];
+
+const sectors = ["Law enforcement", "Air traffic management", "EU procurement programmes", "+ enterprise"];
+---
+
+<Base
+  title="Consultancy · Outcome Works"
+  description="AI advisory, bid & proposal support and bespoke enterprise tooling for teams competing in public-sector and enterprise procurement."
+>
+  <PageHero
+    kicker="Consultancy · Work with our team"
+    tone="consult"
+    title="The team you want in the room when the work is hard to win."
+    lede="Advisory, hands-on bid support, and bespoke tooling, delivered by a small, senior team with deep procurement and AI pedigree."
+    ctaLabel="Talk to our team"
+    ctaHref="/contact"
+  />
+
+  <!-- Services, detailed — split-row feature family (keeps the page's one eyebrow) -->
+  <section class="bg-paper">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <SectionLabel text="What we do" tone="consult" class="mb-10" />
+      <div class="flex flex-col gap-4 reveal">
+        {services.map((s) => (
+          <div class="grid md:grid-cols-[1fr_1.4fr] gap-6 md:gap-10 bg-surface border border-line rounded-lg p-7 md:p-9">
+            <div>
+              <h2 class="text-[24px] md:text-[28px]">{s.name}</h2>
+              <div class="font-mono text-[11px] text-consult mt-2 tracking-wide uppercase">{s.tag}</div>
+            </div>
+            <div>
+              <p class="text-[15px] text-muted leading-relaxed mb-5">{s.body}</p>
+              <ul class="flex flex-col gap-2">
+                {s.outcomes.map((o) => (
+                  <li class="flex items-start gap-2.5 text-[14px] text-ink">
+                    <span class="text-consult mt-0.5">→</span>{o}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Approach — process row family (no eyebrow; verb labels carry, no numerals) -->
+  <section class="bg-surface border-y border-line">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <h2 class="text-[26px] md:text-[32px] mb-10">How an engagement runs.</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10 reveal">
+        {steps.map((s) => (
+          <div class="border-t-2 border-consult/30 pt-4">
+            <h3 class="text-[18px] mb-2">{s.t}</h3>
+            <p class="text-[13.5px] text-muted leading-relaxed">{s.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Proof — quantified outcome (no eyebrow) -->
+  <section class="bg-paper">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <CaseMetric
+        metric="3×"
+        metricLabel="tenders / month"
+        sector="Sector-led · unnamed client"
+        heading="Hands-on bid support that tripled throughput"
+        body="We embedded with a specialist team's bid function, rebuilt their response process around a reusable engine, and tripled the number of tenders they could answer to a winning standard."
+        href="/case-studies"
+        tone="consult"
+      />
+      <div class="flex flex-wrap gap-2 mt-8">
+        {sectors.map((c) => <TrustPill text={c} tone="consult" />)}
+      </div>
+    </div>
+  </section>
+
+  <DualCTA consultHeading="Tell us about your bid or AI problem" />
+</Base>

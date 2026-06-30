@@ -1,0 +1,39 @@
+---
+import { Button } from "./Button";
+import SectionLabel from "./SectionLabel.astro";
+
+/**
+ * Inner-page hero. Tone tints the kicker tick, the left accent rule and the
+ * optional CTA to the door the page belongs to: consultancy (teal),
+ * products (terracotta), spine (slate, default). `num` is accepted but
+ * ignored (kept for backward-compat with existing callers).
+ */
+interface Props {
+  kicker: string;
+  num?: string;
+  title: string;
+  lede: string;
+  tone?: "spine" | "consult" | "product";
+  ctaLabel?: string;
+  ctaHref?: string;
+}
+const { kicker, title, lede, tone = "spine", ctaLabel, ctaHref } = Astro.props;
+const ctaVariant = tone === "consult" ? "consult" : tone === "product" ? "product" : "primary";
+const wash = { spine: "bg-paper", consult: "bg-consult-wash/40", product: "bg-product-wash/40" }[tone];
+const accent = { spine: "bg-spine", consult: "bg-consult", product: "bg-product" }[tone];
+---
+<section class={`${wash} border-b border-line`}>
+  <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-24">
+    <div class="relative pl-5 md:pl-7 max-w-[60ch]">
+      <span class={`absolute left-0 top-1.5 bottom-1.5 w-[3px] rounded-full ${accent}`} aria-hidden="true"></span>
+      <SectionLabel text={kicker} tone={tone} class="mb-5" />
+      <h1 class="max-w-[18ch]">{title}</h1>
+      <p class="mt-5 lede">{lede}</p>
+      {ctaLabel && ctaHref && (
+        <div class="mt-8">
+          <Button href={ctaHref} variant={ctaVariant}>{ctaLabel}</Button>
+        </div>
+      )}
+    </div>
+  </div>
+</section>

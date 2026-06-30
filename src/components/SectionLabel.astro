@@ -1,0 +1,26 @@
+---
+/**
+ * Mono kicker above a section heading. Tone tints a short leading tick mark
+ * for consultancy / products / spine.
+ *
+ * NOTE: the old numeric enumerator (`num="01"`) is intentionally no longer
+ * rendered — section-number eyebrows read as templated. The prop is still
+ * accepted so existing pages don't break; it's simply ignored.
+ */
+interface Props {
+  text: string;
+  num?: string;
+  tone?: "spine" | "consult" | "product";
+  class?: string;
+}
+const { text, tone = "spine", class: cls = "" } = Astro.props;
+const tick = {
+  spine: "bg-spine",
+  consult: "bg-consult",
+  product: "bg-product",
+}[tone];
+---
+<div class={`flex items-center gap-2.5 ${cls}`}>
+  <span class={`h-px w-6 ${tick}`} aria-hidden="true"></span>
+  <span class="kicker">{text}</span>
+</div>

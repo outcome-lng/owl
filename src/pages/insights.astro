@@ -1,0 +1,67 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import { DualCTA } from "../components/DualCTA";
+import { withBase } from "../utils/url";
+
+// PLACEHOLDER_INSIGHTS — article stubs from the blueprint. Wire to real article
+// pages (or a content collection) when the writing is ready.
+const featured = {
+  title: "What AI actually changes about a tender response",
+  meta: "Article",
+  read: "6 min",
+  blurb: "The honest version: where AI earns its place in a bid, where it gets you disqualified, and how to tell the difference before the deadline.",
+};
+const articles = [
+  { title: "Reading the EU procurement pipeline before your rivals", meta: "Article", read: "8 min" },
+  { title: "Evaluating 400 CVs in an afternoon, defensibly", meta: "Article", read: "5 min" },
+  { title: "Bid support vs. bid software: when to reach for which", meta: "Article", read: "7 min" },
+];
+---
+
+<Base
+  title="Insights · Outcome Works"
+  description="House-voice authority on AI in public-sector and enterprise procurement, written for the buyer who researches quietly before getting in touch."
+>
+  <PageHero
+    kicker="Insights"
+    tone="consult"
+    title="AI in procurement, without the hype."
+    lede="The buyer for this work researches quietly for months before making contact. These are the things worth knowing, plainly, from people who do the work."
+  />
+
+  <section class="bg-paper">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <h2 class="text-[26px] md:text-[32px] mb-10">Latest writing.</h2>
+
+      <!-- Featured lead -->
+      <a href={withBase("/insights")} class="group block border-t-2 border-consult pt-6 mb-2 reveal">
+        <div class="font-mono text-[11px] uppercase tracking-[0.14em] text-consult mb-3">Latest</div>
+        <h3 class="text-[26px] md:text-[34px] font-bold tracking-tight leading-tight max-w-[20ch] group-hover:text-consult transition-colors">{featured.title}</h3>
+        <p class="text-[15px] text-muted leading-relaxed mt-4 max-w-[60ch]">{featured.blurb}</p>
+        <div class="font-mono text-[11px] text-faint mt-4 tracking-wide">{featured.meta} · {featured.read}</div>
+      </a>
+
+      <!-- The rest, as an editorial list -->
+      <ul class="divide-y divide-line border-t border-line mt-10">
+        {articles.map((a) => (
+          <li>
+            <a href={withBase("/insights")} class="group flex items-center gap-5 py-5 md:py-6">
+              <div class="flex-1">
+                <h3 class="text-[18px] md:text-[20px] font-semibold text-ink leading-snug group-hover:text-consult transition-colors">{a.title}</h3>
+                <div class="font-mono text-[11px] text-faint mt-2 tracking-wide">{a.meta} · {a.read}</div>
+              </div>
+              <span class="font-mono text-[13px] text-consult opacity-0 group-hover:opacity-100 transition-opacity shrink-0">Read →</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <p class="text-[13.5px] text-muted mt-10 leading-relaxed">
+        New writing published regularly. Subscribe via the contact page to be notified.
+      </p>
+    </div>
+  </section>
+
+  <DualCTA consultHeading="Got a question we should write about?" />
+</Base>

@@ -1,0 +1,309 @@
+---
+import Base from "../../layouts/Base.astro";
+import { Button } from "../../components/Button";
+
+// Tender Intel is a member of the OWL suite, but its scope (an eleven-year EU
+// procurement corpus, two-schema reconciliation, forecasting) warrants a richer
+// page than the standard JTBD [slug] template — same pattern as Cadre.
+
+const heroChips = [
+  "EU TED · every notice",
+  "2016–2026 · 7.15M notices",
+  "eForms + legacy TED-XML · CPV / NUTS",
+];
+
+const constraints = [
+  { k: "7.15M", label: "Notices indexed", v: "Eleven years of EU procurement — every TED notice parsed, normalised and full-text searchable in one place, not scattered across portals." },
+  { k: "2 schemas", label: "A moving target", v: "TED switched from legacy XML to eForms in late 2022, and the two co-exist for years. Most tools read one. Tender Intel reconciles both into a single model." },
+  { k: "Weeks", label: "The head start", v: "By the time a tender lands in your inbox, a prepared competitor has been shaping the requirement for weeks. The edge is in the pipeline, not the deadline." },
+  { k: "±1%", label: "Numbers you can trust", v: "Monthly counts and contract values cross-validate to within one percent of TED's own published figures — foresight you can take to a board." },
+];
+
+const powers = [
+  {
+    role: "Bronze · captured once", title: "Ingests",
+    points: [
+      "Original TED packages stored untouched — the only thing ever fetched from source",
+      "Captured once, never re-downloaded: an immutable record of what was published",
+      "Parse failures isolate and retry, they never halt the run",
+    ],
+    stamp: "immutable / idempotent / append-only",
+  },
+  {
+    role: "Silver · reconciled", title: "Normalises",
+    points: [
+      "Two parsers — legacy TED-XML and eForms — fold into one normalised model",
+      "Schema detected per file; older notices leave new fields null, queries tolerate it",
+      "Values held in both original currency and EUR at the ECB fixing on publication",
+    ],
+    stamp: "deterministic / unit-tested / cross-validated ±1%",
+  },
+  {
+    role: "Gold · derived", title: "Forecasts",
+    points: [
+      "Pre-aggregated marts power search, ranking and market analysis",
+      "Recurrence and framework-expiry models flag what's coming back, and when",
+      "Every prediction backtested and confidence-scored, never asserted",
+    ],
+    stamp: "rebuildable / backtested / confidence-scored",
+  },
+];
+
+const flow = ["Capture", "Parse", "Normalise", "Index", "Match", "Rank", "Alert", "Forecast"];
+
+const platform = [
+  { role: "Config, not code", title: "A profile per client", body: "Every business is a YAML profile — target CPV codes, countries, value bands and keywords. Adding a client is adding a file, never a new code path." },
+  { role: "Scheduled", title: "Digests that arrive triaged", body: "Per-profile email digests on your schedule, so the relevant opportunities land in the inbox already filtered and ranked — no logging in to check." },
+  { role: "Interactive", title: "Search, map and watch", body: "Full-text notice search with hierarchical CPV filtering, a market map of who buys what, and buyer-watch feeds for the organisations you track." },
+];
+
+const regs = [
+  { art: "CPV", label: "Procurement vocabulary", desc: "Multi-select hierarchical CPV typeahead, matched on code prefixes so a division-level filter catches every sub-code beneath it." },
+  { art: "NUTS", label: "Geography", desc: "The 2024 NUTS revision, mapped back to 2016 and 2021 so a region's time series stays stable across boundary changes." },
+  { art: "eForms + TED-XML", label: "Both schemas", desc: "Notices from 2014 onward in either schema, deduplicated on the TED publication number so nothing is double-counted across the changeover." },
+  { art: "EUR", label: "Currency", desc: "Every value stored in both its original currency and EUR, converted at the ECB monthly fixing on the publication date." },
+  { art: "Notice types", label: "Classification", desc: "CN, PIN, CAN, DPS, framework and qualification-system notices classified per the EU directives, not guessed from keywords." },
+  { art: "GDPR", label: "Privacy by construction", desc: "Only the contact email domain is ever stored — never the full address, name or phone. Personal data is designed out, not deleted later." },
+];
+
+const frameworks = [
+  { label: "Expiry", title: "Framework run-off", body: "Active frameworks and their expiry dates, collapsed to one opportunity per buyer, so re-procurements surface months before they reopen." },
+  { label: "Recurrence", title: "Predictable buyers", body: "Buyers who tender the same thing on a cycle are detected and their next window estimated, tuned against eleven years of history rather than a guess." },
+  { label: "Suppliers", title: "Entity resolution", body: "Award winners resolved deterministically across spellings and national IDs, so a supplier's full footprint is one record, not forty fragments." },
+  { label: "Value", title: "Quality-flagged", body: "Outlier and malformed contract values are flagged rather than silently summed, so the market totals you act on are clean." },
+];
+
+const stats = [
+  { n: "7.15M", label: "Notices indexed", body: "Every TED notice from 2016 to today — parsed, normalised and searchable in seconds." },
+  { n: "±1%", label: "Cross-validated", body: "Monthly counts and values reconciled against TED's own published CSVs, country by country." },
+  { n: "EU-wide", label: "Every member state", body: "The whole single market's public procurement, watched at the scale buyers operate." },
+];
+
+const stack = [
+  { t: "Python 3.12", s: "lxml · polars · httpx" },
+  { t: "DuckDB", s: "Reads Parquet in place" },
+  { t: "Cloudflare R2", s: "Zero-egress object store" },
+  { t: "Meilisearch", s: "Sub-second full-text" },
+  { t: "FastAPI", s: "Typed API + workers" },
+  { t: "Claude API", s: "Pinned, every call logged" },
+];
+
+const archFoot = ["TED, the official EU source", "Idempotent, reproducible rebuilds", "Stream-parsed, never staged to disk", "Contact email domain only"];
+---
+
+<Base
+  title="Tender Intel · OWL suite · Outcome Works"
+  description="Tender Intel reads the entire EU public-procurement pipeline — eleven years deep, updated daily — and surfaces the opportunities that fit your business early enough to shape them. Two-schema corpus, cross-validated to ±1%, forecasting built in."
+>
+  <!-- HERO -->
+  <section class="mesh-spine relative overflow-hidden">
+    <div class="grid-faint absolute inset-0 opacity-[0.14]" aria-hidden="true"></div>
+    <div class="relative max-w-[1080px] mx-auto px-5 sm:px-6 pt-16 pb-20 md:pt-20 md:pb-24">
+      <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-product-bright mb-5">OWL suite · Tender Intel</div>
+      <h1 class="max-w-[18ch] text-white">See every EU public tender, <span class="italic text-product-bright">ranked for you</span>, the day it publishes.</h1>
+      <p class="mt-6 text-[clamp(17px,2vw,20px)] text-white/70 leading-relaxed max-w-[60ch]">
+        Tender Intel reads the whole European procurement pipeline — eleven years deep and updated daily — and brings you the opportunities that fit your business, triaged and ranked, early enough to actually shape them.
+      </p>
+      <div class="flex flex-wrap gap-2.5 mt-8">
+        {heroChips.map((c) => (
+          <span class="font-mono text-[11.5px] text-white/70 border border-white/15 rounded-full px-3.5 py-1.5">{c}</span>
+        ))}
+      </div>
+      <div class="mt-9">
+        <Button href="/contact" variant="product">Talk to us about Tender Intel</Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHALLENGE -->
+  <section class="bg-paper">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <div class="max-w-[680px] mb-12">
+        <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-product mb-4">The challenge</div>
+        <h2 class="text-[26px] md:text-[34px]">The pipeline is the advantage — and it's drowning you.</h2>
+        <p class="text-[17px] text-muted leading-relaxed mt-5">
+          EU public procurement is enormous, fragmented and constantly changing format. The opportunity is in seeing it early and reading it clearly, but the raw feed is noise, spread across years of incompatible standards.
+        </p>
+      </div>
+      <div class="border-t border-line reveal">
+        {constraints.map((c) => (
+          <div class="grid md:grid-cols-[180px_1fr] gap-4 md:gap-10 py-6 border-b border-line items-baseline">
+            <div>
+              <div class="text-[28px] md:text-[30px] font-bold tracking-tight text-ink leading-none">{c.k}</div>
+              <div class="font-mono text-[10.5px] uppercase tracking-[0.12em] text-product mt-2">{c.label}</div>
+            </div>
+            <p class="text-[15.5px] text-muted leading-relaxed">{c.v}</p>
+          </div>
+        ))}
+      </div>
+      <p class="text-[18px] text-ink mt-8">Generic alerts fire on keywords. <strong class="font-semibold">Tender Intel reads the market.</strong></p>
+    </div>
+  </section>
+
+  <!-- HOW IT'S BUILT -->
+  <section class="mesh-spine relative overflow-hidden">
+    <div class="relative max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <div class="max-w-[720px] mb-12">
+        <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-product-bright mb-4">How it's built</div>
+        <h2 class="text-[26px] md:text-[34px] text-white">Three layers, each rebuildable from the one beneath it.</h2>
+        <p class="text-[16px] text-white/65 leading-relaxed mt-5">
+          Tender Intel never discards information and never trusts a number it can't reproduce. Raw notices are captured once; everything downstream is derived, deterministic and rebuildable from scratch.
+        </p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4 reveal">
+        {powers.map((p) => (
+          <div class="flex flex-col rounded-lg border border-white/12 bg-white/[0.03] p-6">
+            <div class="font-mono text-[11px] uppercase tracking-[0.14em] text-product-bright font-semibold">{p.role}</div>
+            <h3 class="text-white text-[21px] font-semibold mt-2 mb-4">{p.title}</h3>
+            <ul class="flex flex-col gap-3 flex-1">
+              {p.points.map((pt) => (
+                <li class="flex items-start gap-2.5 text-[14px] text-white/75 leading-snug">
+                  <span class="text-product-bright mt-1.5 shrink-0 w-1.5 h-1.5 rounded-[1px] bg-product-bright"></span>{pt}
+                </li>
+              ))}
+            </ul>
+            <div class="mt-6 pt-4 border-t border-white/10 font-mono text-[10.5px] text-white/45">{p.stamp}</div>
+          </div>
+        ))}
+      </div>
+      <p class="text-[18px] md:text-[20px] text-white mt-10 max-w-[760px] leading-relaxed">
+        Every figure traces back to a captured notice, and every mart rebuilds from the raw record, <strong class="font-medium text-product-bright">bit for bit.</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- WORKFLOW -->
+  <section class="bg-surface border-b border-line">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <div class="max-w-[680px] mb-10">
+        <h2 class="text-[26px] md:text-[34px]">From a raw notice to a ranked opportunity.</h2>
+        <p class="text-[17px] text-muted leading-relaxed mt-5">The same pipeline runs every day — capture, parse, normalise, index, then match against the profiles that describe your business.</p>
+      </div>
+      <div class="flex flex-wrap items-center gap-2 reveal">
+        {flow.map((step, i) => (
+          <>
+            <span class="font-mono text-[13px] font-semibold text-ink bg-paper border border-line rounded-md px-3.5 py-2.5">{step}</span>
+            {i < flow.length - 1 && <span class="text-product font-bold">→</span>}
+          </>
+        ))}
+      </div>
+      <div class="grid md:grid-cols-3 gap-5 mt-12 reveal">
+        {platform.map((p) => (
+          <div class="rounded-lg border border-line bg-surface p-6">
+            <div class="font-mono text-[11px] uppercase tracking-[0.12em] text-product font-semibold">{p.role}</div>
+            <h3 class="text-[18px] text-ink font-semibold mt-2 mb-2">{p.title}</h3>
+            <p class="text-[14.5px] text-muted leading-relaxed">{p.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- REFERENCE DATA -->
+  <section class="bg-paper">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <div class="max-w-[700px] mb-12">
+        <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-product mb-4">Speaks the language of EU procurement</div>
+        <h2 class="text-[26px] md:text-[34px]">The reference data the pipeline actually runs on.</h2>
+        <p class="text-[17px] text-muted leading-relaxed mt-5">
+          Tender Intel handles the vocabulary of EU tenders natively, so a filter means the same thing across eleven years of changing standards.
+        </p>
+      </div>
+      <div class="border-t border-line reveal">
+        {regs.map((r) => (
+          <div class="grid md:grid-cols-[150px_1fr] gap-3 md:gap-8 py-5 border-b border-line items-baseline">
+            <div>
+              <div class="font-mono text-[13px] font-semibold text-ink">{r.art}</div>
+              <div class="font-mono text-[10px] uppercase tracking-[0.12em] text-product mt-1.5">{r.label}</div>
+            </div>
+            <p class="text-[15.5px] text-muted leading-relaxed">{r.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FORESIGHT -->
+  <section class="bg-surface border-y border-line">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <div class="max-w-[700px] mb-10">
+        <h2 class="text-[26px] md:text-[34px]">Foresight, not just a feed.</h2>
+        <p class="text-[17px] text-muted leading-relaxed mt-5">
+          Most tools tell you a tender exists. Tender Intel tells you what's likely coming, who keeps buying it, and when the current contract runs out.
+        </p>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-4 reveal">
+        {frameworks.map((f) => (
+          <div class="rounded-lg border border-line bg-paper p-6">
+            <div class="font-mono text-[10.5px] uppercase tracking-[0.12em] text-product font-semibold mb-3">{f.label}</div>
+            <h3 class="text-[17px] text-ink font-semibold mb-2">{f.title}</h3>
+            <p class="text-[14px] text-muted leading-relaxed">{f.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- COVERAGE / NUMBERS -->
+  <section class="mesh-spine relative overflow-hidden">
+    <div class="relative max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <div class="max-w-[720px] mb-12">
+        <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-product-bright mb-4">What it covers</div>
+        <h2 class="text-[26px] md:text-[34px] text-white">Eleven years of the European market, one query away.</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8 reveal">
+        {stats.map((s) => (
+          <div>
+            <div class="text-[clamp(40px,6vw,58px)] font-bold tracking-tight text-white leading-none">{s.n}</div>
+            <div class="font-mono text-[11px] uppercase tracking-[0.12em] text-product-bright mt-4 mb-2">{s.label}</div>
+            <p class="text-[14px] text-white/65 leading-relaxed">{s.body}</p>
+          </div>
+        ))}
+      </div>
+      <div class="mt-12 rounded-lg border border-white/12 bg-white/[0.03] p-6 md:p-7 max-w-[800px] reveal">
+        <p class="text-[15.5px] text-white/75 leading-relaxed">
+          <strong class="text-white font-semibold">Live, and tuned to your business.</strong> Profiles, digests and dashboards are configured to your sectors, codes and target buyers. The corpus updates daily, and rebuilds itself idempotently from the raw record whenever a parser improves — so history gets more accurate, never stale.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARCHITECTURE -->
+  <section class="bg-paper">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <div class="max-w-[700px] mb-10">
+        <h2 class="text-[26px] md:text-[34px]">A lean analytical stack, no warehouse required.</h2>
+      </div>
+      <div class="flex flex-wrap gap-3 mb-8 reveal">
+        {stack.map((c) => (
+          <div class="rounded-md border border-line bg-surface px-4 py-3">
+            <div class="font-mono text-[13.5px] font-semibold text-ink">{c.t}</div>
+            <div class="text-[12px] text-faint mt-0.5">{c.s}</div>
+          </div>
+        ))}
+      </div>
+      <p class="text-[16px] text-muted leading-relaxed max-w-[760px]">
+        Analytics run on <strong class="text-ink font-semibold">DuckDB reading Parquet directly from R2</strong>, so there's no separate warehouse to feed or fund. Raw packages, normalised Parquet and aggregated marts live as three layers in object storage, each idempotently rebuildable from the one beneath — and the full corpus stream-parses without ever staging a terabyte of XML to disk.
+      </p>
+      <div class="flex flex-wrap gap-x-7 gap-y-3 mt-7">
+        {archFoot.map((f) => (
+          <span class="flex items-center gap-2 font-mono text-[12.5px] text-muted">
+            <span class="w-1.5 h-1.5 rounded-full bg-product"></span>{f}
+          </span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="mesh-spine relative overflow-hidden">
+    <div class="grid-faint absolute inset-0 opacity-[0.14]" aria-hidden="true"></div>
+    <div class="relative max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-24">
+      <h2 class="text-[clamp(28px,4.4vw,44px)] text-white max-w-[720px]">See the pipeline <span class="italic text-product-bright">before your rivals do</span>.</h2>
+      <p class="text-[18px] text-white/70 leading-relaxed max-w-[600px] mt-5 mb-8">
+        If you bid for EU and public-sector work, the advantage is in reading the market early and reading it clearly. We can walk you through Tender Intel against your own sectors, CPV codes and target buyers.
+      </p>
+      <Button href="/contact" variant="product">Talk to us about Tender Intel</Button>
+    </div>
+  </section>
+</Base>

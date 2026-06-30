@@ -1,0 +1,13 @@
+---
+/**
+ * Editorial divider — a hairline (solid) or dashed rule, per the blueprint's
+ * structured, document-like rhythm.
+ */
+interface Props {
+  variant?: "solid" | "dashed";
+  class?: string;
+}
+const { variant = "solid", class: cls = "" } = Astro.props;
+const style = variant === "dashed" ? "border-t border-dashed border-line" : "border-t border-line";
+---
+<hr class={`${style} ${cls}`} />

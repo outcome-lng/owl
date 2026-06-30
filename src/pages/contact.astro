@@ -1,0 +1,58 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import { ContactForm } from "../components/ContactForm";
+---
+
+<Base
+  title="Contact · Outcome Works"
+  description="Talk to our team about a bid or AI problem, or book a demo of the OWL suite. We reply to every enquiry within one working day."
+>
+  <PageHero
+    kicker="Contact"
+    tone="spine"
+    title="Two doors, one inbox."
+    lede="Whether you want a partner for the work or a tool you run yourself, start here. Tell us what you need and we'll point you to the right door."
+  />
+
+  <section class="bg-paper">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <div class="grid md:grid-cols-[1fr_1.4fr] gap-10 lg:gap-16">
+        <!-- Methods -->
+        <div>
+          <h2 class="text-[22px] md:text-[24px] mb-6">How to reach us.</h2>
+          <div class="flex flex-col gap-6">
+            <div class="border-l-2 border-consult pl-4">
+              <div class="font-mono text-[11px] uppercase tracking-[0.1em] text-consult mb-1.5">Consultancy</div>
+              <p class="text-[14.5px] text-muted leading-relaxed">
+                Advisory, bid support or a bespoke build. Tell us the outcome and the deadline.
+              </p>
+            </div>
+            <div class="border-l-2 border-product pl-4">
+              <div class="font-mono text-[11px] uppercase tracking-[0.1em] text-product mb-1.5">Products</div>
+              <p class="text-[14.5px] text-muted leading-relaxed">
+                Want to see the OWL suite running? Ask for a demo and pricing.
+              </p>
+            </div>
+            <div class="pt-2 border-t border-line">
+              <div class="kicker mb-1.5">Email</div>
+              {/* PLACEHOLDER_CONTACT_EMAIL - confirm before launch */}
+              <a href="mailto:hello@outcomeworks.co.uk" class="text-[15px] text-ink hover:text-consult transition-colors">
+                hello@outcomeworks.co.uk
+              </a>
+            </div>
+            <p class="text-[12.5px] text-faint leading-relaxed">
+              Public-sector &amp; enterprise procurement · UK &amp; EU
+            </p>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <div class="bg-surface border border-line rounded-lg p-7 md:p-9">
+          <h2 class="text-[22px] md:text-[24px] mb-6">Send us a message.</h2>
+          <ContactForm client:load />
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

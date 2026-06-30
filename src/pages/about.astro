@@ -1,0 +1,102 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import SectionLabel from "../components/SectionLabel.astro";
+import { TeamGrid } from "../components/TeamGrid";
+import { DualCTA } from "../components/DualCTA";
+
+// Founders. PLACEHOLDER_TEAM_PHOTOS — headshots still to be added.
+const team = [
+  {
+    name: "Lee Nicholson",
+    role: "CEO",
+    photo: "/images/lee-nicholson.webp",
+    bio: [
+      "Lee is an entrepreneur, technology strategist and business consultant with over 30 years’ experience building technology businesses, leading digital transformation and helping organisations achieve commercial growth.",
+      "Beginning his career as a software engineer, Lee developed complex business-critical systems, including command and control software for UK Ambulance Services, before progressing into senior leadership roles including IT Director, Technical Director and Managing Director. He has founded and grown software development companies and digital consultancies, leading the design and delivery of enterprise platforms, cloud solutions and AI-enabled products.",
+      "Alongside his technical and commercial leadership, Lee has become recognised for shaping winning growth strategies across the UK and European public sector. He has led and advised on complex procurements, helping organisations develop compelling propositions, commercial models and delivery strategies for large managed service and digital transformation opportunities.",
+      "Lee is Co-founder of Outcome Works, where he helps technology companies accelerate growth through strategy, AI, demand generation, commercial modelling, bid excellence and delivery assurance. He also advises businesses on market entry, sales transformation and technology investment, combining deep technical knowledge with practical commercial experience.",
+    ],
+  },
+  {
+    name: "Mark Ebden",
+    role: "CTO",
+    photo: "/images/mark-ebden.webp",
+    bio: "Mark has operated in the IT industry for over 25 years across government, defence, education, and automotive sectors. His career has included leadership roles at Serco, HPE, PA Consulting, GM, and AWS as CTO, CIO, and Chief Architect. Mark is known for secure, complex systems design within defence and government, and is a dedicated advocate for cloud, data, and AI technologies. He is a Fellow of both the British Computer Society and the Royal Society of Arts and a Chartered Engineer. Mark is a co-founder of Outcome Works.",
+  },
+  {
+    name: "John Jones",
+    role: "Chief Sales Architect",
+    photo: "/images/john-jones.webp",
+    bio: "John has operated in the IT industry for over 40 years, starting off as a mathematician in the defence sector. In the mid 80's he provided bidding and business development services for Logica plc (now CGI). In 1997, John moved to CMG to work in strategic outsourcing and partnership based IT/BPO deals. Following some large strategic wins, John and some colleagues founded one of the UK's first bid management companies, helping suppliers to win large outcome based deals in the public sector. In 2009, John set up Landseer Partners, a strategic advisory company to help service providers win large strategic deals, including advice and guidance to new market entrants and to aid private equity companies to undertake sales due diligence on companies that might be acquired by them. In addition to running Landseer Partners, John helped found Outcome Works in 2025.",
+  },
+];
+
+const values = [
+  { t: "We don't oversell", d: "The number carries the weight. We'd rather show a result than make a claim, the register cautious buyers trust." },
+  { t: "Trustworthy with sensitive work", d: "Much of what we do sits under NDA in security-conscious sectors. Discretion and rigour aren't optional." },
+  { t: "We leave capability behind", d: "Whether it's advice, a bid, or a tool, you should be stronger after we've worked together, not dependent on us." },
+];
+---
+
+<Base
+  title="About · Outcome Works"
+  description="The people behind Outcome Works: a small, senior team with deep procurement and AI delivery pedigree, and a record of trust on sensitive work."
+>
+  <PageHero
+    kicker="About"
+    tone="spine"
+    title="The people behind the work."
+    lede="The consultancy sells people, and the products prove the capability. Either way, it comes down to a small, senior team you can trust with work that matters."
+  />
+
+  <!-- Story — prose (no eyebrow) -->
+  <section class="bg-paper">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <h2 class="text-[26px] md:text-[32px] mb-8">Why we exist.</h2>
+      <div class="max-w-[64ch] flex flex-col gap-4 reveal">
+        <p class="text-[17px] text-ink leading-relaxed">
+          Outcome Works was built on a simple observation: the teams competing for
+          public-sector and enterprise work are often brilliant at what they do, and
+          stretched thin by the work of winning it.
+        </p>
+        <p class="text-[16px] text-muted leading-relaxed">
+          We started by doing that work by hand: AI advisory, win strategy, and
+          hands-on bid support for teams in law enforcement, air traffic management
+          and EU procurement programmes. Then we productised what we'd learned into
+          the OWL suite, so the same capability could run without us in the room.
+        </p>
+        <p class="text-[16px] text-muted leading-relaxed">
+          One brand, two doors: work with our team, or run the tools yourself. The
+          consultancy lends human credibility to the products; the products prove the
+          consultancy can deliver. Each makes the other stronger.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team — grid (keeps the page's one eyebrow) -->
+  <section class="bg-surface border-y border-line">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <SectionLabel text="The team" tone="spine" class="mb-10" />
+      <TeamGrid members={team} variant="full" />
+    </div>
+  </section>
+
+  <!-- Values — framed cards (no eyebrow) -->
+  <section class="bg-paper">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <h2 class="text-[26px] md:text-[32px] mb-10">How we work.</h2>
+      <div class="grid md:grid-cols-3 gap-6 reveal">
+        {values.map((v) => (
+          <div class="framed text-spine p-6 bg-surface border border-line rounded-lg">
+            <h3 class="text-[19px] text-ink mb-2">{v.t}</h3>
+            <p class="text-[14px] text-muted leading-relaxed">{v.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <DualCTA />
+</Base>

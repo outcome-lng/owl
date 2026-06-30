@@ -1,0 +1,60 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import { ProductCard } from "../components/ProductCard";
+import { CaseMetric } from "../components/CaseMetric";
+import { DualCTA } from "../components/DualCTA";
+
+const products = [
+  { name: "OWL Ops", job: "delivery ops", href: "/products/owl-ops", description: "Run bid and delivery operations from one place, the day-to-day engine behind a high-throughput team." },
+  { name: "OWL Bid Team", job: "AI bid team", href: "/products/owl-bid-team", description: "Eight specialist AI agents run a structured bid process, from raw opportunity to decision-grade tender artefacts." },
+  { name: "OWL Brain", job: "knowledge core", href: "/products/owl-brain", description: "Your organisation's reusable knowledge core: past answers, evidence and boilerplate, instantly retrievable." },
+  { name: "Tender Intel", job: "market radar", href: "/products/tender-intel", description: "Read the procurement pipeline before your rivals: relevant opportunities surfaced and triaged early." },
+  { name: "CVInsight", job: "CV evaluation", href: "/products/cvinsight", description: "Evaluate hundreds of CVs against the criteria in an afternoon, defensibly, with the audit trail to prove it." },
+  { name: "Cadre", job: "EU staffing", href: "/products/cadre", description: "AI staffing for EU institutions across the full contractor lifecycle. Compliance-native and built to pass an audit." },
+];
+---
+
+<Base
+  title="The OWL suite · Outcome Works"
+  description="The OWL suite: software you operate yourself across the bid and staffing lifecycle. OWL Ops, OWL Bid Team, OWL Brain, Tender Intel, CVInsight and Cadre."
+>
+  <PageHero
+    kicker="Products · Run it yourself"
+    tone="product"
+    title="The OWL suite: capability you operate yourself."
+    lede="Six focused tools across the bid and staffing lifecycle, built from years of doing this work by hand. Software you run from day one, with demos and pricing on every page."
+    ctaLabel="Book a demo"
+    ctaHref="/contact"
+  />
+
+  <!-- The suite — card grid, 6 tools (3x2, no empty slot) -->
+  <section class="bg-paper">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <h2 class="text-[26px] md:text-[32px] mb-3">Six tools across the bid and staffing lifecycle.</h2>
+      <p class="text-[15px] text-muted leading-relaxed max-w-[60ch] mb-10">Each tool stands alone, and they share one knowledge core. Adopt one, or run the whole lifecycle.</p>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 reveal">
+        {products.map((p) => (
+          <ProductCard name={p.name} job={p.job} href={p.href} description={p.description} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Proof — quantified outcome (no eyebrow) -->
+  <section class="bg-surface border-y border-line">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <CaseMetric
+        metric="~70%"
+        metricLabel="faster CV evaluation"
+        sector="Sector-led · unnamed client"
+        heading="From a week of CV review to an afternoon"
+        body="CVInsight took a high-volume, high-stakes evaluation task and compressed it by roughly 70%, with a defensible audit trail that stands up to scrutiny."
+        href="/products/cvinsight"
+        tone="product"
+      />
+    </div>
+  </section>
+
+  <DualCTA productHeading="See the OWL suite running" />
+</Base>

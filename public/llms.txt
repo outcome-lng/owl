@@ -1,0 +1,21 @@
+# Your Business Name
+
+> Your business tagline.
+
+Description of your business and what you do.
+
+## Services
+- Service One
+- Service Two
+- Service Three
+
+## Contact
+- Phone: 01234 567890
+- Email: hello@example.com
+- Address: Your Town, County, Postcode
+
+## Key pages
+- Home: https://example.com/
+- Services: https://example.com/services
+- About: https://example.com/about
+- Contact: https://example.com/contact

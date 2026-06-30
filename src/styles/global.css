@@ -1,0 +1,184 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@plugin "@tailwindcss/typography";
+
+/* Self-hosted fonts (no render-blocking Google <link>, no CLS) */
+@import "@fontsource-variable/space-grotesk";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================================
+   Outcome Works — "One brand, two doors" design system
+   Teal  = consultancy (Door A) · Terracotta = products (Door B)
+   Slate = shared spine · Paper background · Ink text
+   Type  = Space Grotesk (display + body) · IBM Plex Mono (labels)
+   Theme is LOCKED light. Footer + dual-CTA are deliberate ink blocks.
+   ============================================================ */
+
+@theme inline {
+  /* Neutrals — calm, trust-first, faintly cool */
+  --color-paper: #ECEFF2;
+  --color-surface: #FFFFFF;
+  --color-sunken: #E3E8EC;
+  --color-ink: #14202B;
+  --color-muted: #5C6B79;
+  --color-faint: #94A1AD;
+  --color-line: #CDD5DC;
+  --color-hairline: #DDE3E9;
+
+  /* Master brand — the owl: navy body + cyan wing (sampled from owl.png) */
+  --color-brand-navy: #06395B;
+  --color-brand-cyan: #179EB2;
+
+  /* Door A — consultancy. Retuned toward the owl's wing cyan so the logo and
+     the consultancy door share one teal (consult stays dark enough for white
+     text — WCAG AA). */
+  --color-consult: #15727C;
+  --color-consult-wash: #DCEDEF;
+  --color-consult-bright: #36A9BC;
+
+  /* Door B — products (terracotta counterpoint, unchanged) */
+  --color-product: #C2562F;
+  --color-product-wash: #F6E6DE;
+  --color-product-bright: #E5916C;
+
+  /* Shared spine */
+  --color-spine: #3A4654;
+  --color-spine-wash: #E2E5E9;
+
+  /* Semantic mappings */
+  --color-background: var(--color-paper);
+  --color-foreground: var(--color-ink);
+  --color-border: var(--color-line);
+  --color-primary: var(--color-consult);
+  --color-primary-foreground: #FFFFFF;
+  --color-card: var(--color-surface);
+  --color-card-foreground: var(--color-ink);
+
+  --font-sans: 'Space Grotesk Variable', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', monospace;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-size: 16.5px;
+    line-height: 1.6;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sans font-bold tracking-tight text-ink;
+    text-wrap: balance;
+  }
+
+  h1 {
+    font-size: clamp(40px, 5.4vw, 64px);
+    line-height: 1.04;
+    letter-spacing: -0.022em;
+  }
+
+  h2 {
+    font-size: clamp(28px, 3.8vw, 44px);
+    line-height: 1.1;
+    letter-spacing: -0.016em;
+  }
+
+  h3 {
+    font-size: clamp(19px, 2.4vw, 23px);
+    line-height: 1.25;
+    @apply font-semibold;
+  }
+
+  ::selection {
+    background: var(--color-consult);
+    color: #fff;
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--color-consult);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  /* Mono eyebrow / kicker — rationed. Genuine labels only. */
+  .kicker {
+    @apply font-mono uppercase text-muted;
+    font-size: 11.5px;
+    letter-spacing: 0.14em;
+    font-weight: 500;
+  }
+
+  /* Lead paragraph under a headline */
+  .lede {
+    @apply text-muted leading-relaxed;
+    font-size: clamp(17px, 1.8vw, 20px);
+    max-width: 56ch;
+  }
+
+  /* Corner-bracketed frame — masthead motif */
+  .framed {
+    position: relative;
+  }
+  .framed::before,
+  .framed::after {
+    content: "";
+    position: absolute;
+    width: 11px;
+    height: 11px;
+    border: 1.5px solid currentColor;
+    opacity: 0.45;
+  }
+  .framed::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+  .framed::after { bottom: -1px; right: -1px; border-left: none; border-top: none; }
+
+  /* Brand-tinted texture grounds (NOT AI-purple, NOT fake screenshots).
+     Used to give image-less B2B sections real visual variation. */
+  .mesh-spine {
+    background-color: var(--color-brand-navy);
+    background-image:
+      radial-gradient(60% 80% at 12% 0%, rgba(23, 158, 178, 0.24), transparent 60%),
+      radial-gradient(50% 70% at 100% 100%, rgba(229, 145, 108, 0.13), transparent 60%);
+  }
+  /* Owl rendered as a single white tone for faint watermarks on dark grounds.
+     Raster-friendly: works on the navy PNG until a mono asset exists. */
+  .owl-mono {
+    filter: brightness(0) invert(1);
+  }
+  .grid-faint {
+    background-image:
+      linear-gradient(to right, var(--color-hairline) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--color-hairline) 1px, transparent 1px);
+    background-size: 56px 56px;
+    -webkit-mask-image: radial-gradient(120% 100% at 50% 0%, #000 35%, transparent 78%);
+    mask-image: radial-gradient(120% 100% at 50% 0%, #000 35%, transparent 78%);
+  }
+}
+
+/* Restrained scroll-reveal (MOTION 4). CSS-only, no JS, no library.
+   Content is visible by default; only animates where supported and when
+   the user has not asked to reduce motion. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 22%;
+    }
+  }
+}
+
+@keyframes reveal-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: none; }
+}

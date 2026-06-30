@@ -1,0 +1,308 @@
+---
+import Base from "../../layouts/Base.astro";
+import { Button } from "../../components/Button";
+
+// Cadre is a member of the OWL suite, but its scope (EU institutional staffing,
+// compliance) warrants a richer page than the standard JTBD [slug] template.
+
+const heroChips = [
+  "EU AI Act high-risk (employment)",
+  "GDPR by construction",
+  "SFIA / DIGIT-TM / ESCO / CEFR",
+];
+
+const constraints = [
+  { k: "15 days", label: "SLA to fill", v: "Contractually enforced time to fill a demand, ten days for replacements, tracked against every clock in the system." },
+  { k: "Aug 2026", label: "AI Act binds", v: "EU AI Act obligations for AI used in employment take effect. Logging, human oversight and conformity become mandatory, not optional." },
+  { k: "7 years", label: "Audit window", v: "OLAF, DG DIGIT and the Court of Auditors can ask to see how any single decision was made, long after the contractor has left." },
+  { k: "2 frameworks", label: "Reference data", v: "SFIA and DIGIT-TM seniority, ESCO skills, CEFR languages, security clearances and rate ceilings, all live at once, all enforced." },
+];
+
+const powers = [
+  {
+    role: "The model judges", title: "Assists",
+    points: [
+      "Parses CVs into structured data with cited evidence",
+      "Assesses a job description against a candidate, with dimension scores and a narrative",
+      "Drafts interview questions, scorecards and JD improvements",
+    ],
+    stamp: "temperature 0 / strict JSON / version-pinned / logged",
+  },
+  {
+    role: "Code decides", title: "Computes",
+    points: [
+      "Hard eligibility filters: clearance, CEFR, rate ceiling, availability",
+      "Composite 0 to 100 derived from the dimensions, never invented by the model",
+      "All date maths, rate enforcement, ranking and SLA arithmetic",
+    ],
+    stamp: "deterministic / unit-tested / reproducible",
+  },
+  {
+    role: "Humans choose", title: "Decides",
+    points: [
+      "No candidate advances on AI output alone, enforced in the server",
+      "Low-confidence assessments route to human review",
+      "Every override is allowed, reasoned and preserved",
+    ],
+    stamp: "four-eyes approval on shortlists and overrides",
+  },
+];
+
+const flow = ["Demand", "AI JD studio", "Hard filters", "AI match", "Shortlist", "Interview", "Offer", "Placement", "Redeploy"];
+
+const platform = [
+  { role: "Multi-tenant", title: "Isolated workspaces", body: "Separate client workspaces over one consent-gated talent pool, with isolation enforced in the database through row-level security." },
+  { role: "SLA-aware", title: "Clocks that escalate", body: "Every lifecycle timestamp feeds KPIs, RAG status and tiered escalation automatically. No manual chasing." },
+  { role: "Post-placement", title: "Bench and redeployment", body: "Placements, extensions and a 30/60/90-day redeployment pipeline keep talent moving and benches productive." },
+];
+
+const regs = [
+  { art: "Art. 12", label: "Record-keeping", desc: "Every AI decision logged: model, prompt version, confidence and the human action that followed, held for seven years." },
+  { art: "Art. 14", label: "Human oversight", desc: "Oversight enforced in the server rather than by UI convention. Override rates are tracked as a quality signal." },
+  { art: "Art. 13", label: "Transparency", desc: "An AI system card per feature, candidates told where AI is used, and a per-tenant switch for every AI capability." },
+  { art: "Art. 16 to 49", label: "Provider duties", desc: "A provider pack covering an ISO 42001-targeted QMS, Annex IV technical files, declaration of conformity, CE marking, EU registration and FRIA." },
+  { art: "GDPR", label: "Data rights", desc: "Consent workflows with evidence, erasure with audit anonymisation, retention clocks and legal holds." },
+  { art: "Audit", label: "Reconstruction", desc: "An append-only trail lets any shortlist be reconstructed bit for bit, with a one-click audit pack for DG DIGIT, OLAF or the Court of Auditors." },
+];
+
+const frameworks = [
+  { label: "Seniority", title: "SFIA + DIGIT-TM", body: "Both frameworks held side by side. The AI suggests, people validate, and the right one renders per contract." },
+  { label: "Skills", title: "ESCO taxonomy", body: "Skills mapped silently to the EU taxonomy with confidence scores. Users never see the codes underneath." },
+  { label: "Languages", title: "CEFR levels", body: "Structured language levels, with profile minima enforced as deterministic filters rather than guidance." },
+  { label: "Vetting", title: "Security clearance", body: "NATO, EU and national levels with lifecycle tracking, expiry alerts at 180/90/60/30 days and a pending-clearance pipeline." },
+  { label: "Commercials", title: "Contracts and rate cards", body: "Ceilings per profile and level with effective dates, a hard block above ceiling, and margin visibility throughout." },
+];
+
+const stats = [
+  { n: "7", label: "Role-specific dashboards", body: "Admin, Service Manager, Recruiter, Customer, Candidate, Deployment and Skills Intelligence." },
+  { n: "<30s", label: "To match 1,000 candidates", body: "Deterministic pre-filtering followed by batched AI assessment." },
+  { n: "20+", label: "Exportable chart types", body: "CSV and XLSX on every table. PDF packs ready for governance meetings." },
+];
+
+const stack = [
+  { t: "React 19 SPA", s: "TypeScript + TanStack" },
+  { t: "FastAPI", s: "Python API + workers" },
+  { t: "PostgreSQL 18", s: "Row-level security" },
+  { t: "Azure Blob", s: "CVs + cold audit tier" },
+  { t: "Claude API", s: "Pinned, every call logged" },
+];
+
+const archFoot = ["EU data residency throughout", "TLS 1.3", "Per-tenant isolation in the database", "99.5% availability with real headroom"];
+---
+
+<Base
+  title="Cadre · OWL suite · Outcome Works"
+  description="Cadre is a candidate pipeline, AI-matching and deployment platform for EU institutional time-and-materials staffing. Compliance-native, audit-ready, and engineered around the EU AI Act."
+>
+  <!-- HERO -->
+  <section class="mesh-spine relative overflow-hidden">
+    <div class="grid-faint absolute inset-0 opacity-[0.14]" aria-hidden="true"></div>
+    <div class="relative max-w-[1080px] mx-auto px-5 sm:px-6 pt-16 pb-20 md:pt-20 md:pb-24">
+      <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-product-bright mb-5">OWL suite · Cadre</div>
+      <h1 class="max-w-[18ch] text-white">Staffing for EU institutions, engineered to <span class="italic text-product-bright">pass an audit</span>.</h1>
+      <p class="mt-6 text-[clamp(17px,2vw,20px)] text-white/70 leading-relaxed max-w-[60ch]">
+        Cadre is a single platform for the full contractor lifecycle, from demand to deployment and back into the talent pool. Its AI is built so that every score is reproducible, every claim traces to evidence, and every decision has a human owner.
+      </p>
+      <div class="flex flex-wrap gap-2.5 mt-8">
+        {heroChips.map((c) => (
+          <span class="font-mono text-[11.5px] text-white/70 border border-white/15 rounded-full px-3.5 py-1.5">{c}</span>
+        ))}
+      </div>
+      <div class="mt-9">
+        <Button href="/contact" variant="product">Talk to us about Cadre</Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHALLENGE -->
+  <section class="bg-paper">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <div class="max-w-[680px] mb-12">
+        <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-product mb-4">The challenge</div>
+        <h2 class="text-[26px] md:text-[34px]">Institutional staffing is a compliance product, not a recruiting problem.</h2>
+        <p class="text-[17px] text-muted leading-relaxed mt-5">
+          EU time-and-materials staffing runs on contractual SLAs, regulated reference data and seven years of audit liability. Spreadsheets and generic applicant tracking systems track none of it.
+        </p>
+      </div>
+      <div class="border-t border-line reveal">
+        {constraints.map((c) => (
+          <div class="grid md:grid-cols-[180px_1fr] gap-4 md:gap-10 py-6 border-b border-line items-baseline">
+            <div>
+              <div class="text-[28px] md:text-[30px] font-bold tracking-tight text-ink leading-none">{c.k}</div>
+              <div class="font-mono text-[10.5px] uppercase tracking-[0.12em] text-product mt-2">{c.label}</div>
+            </div>
+            <p class="text-[15.5px] text-muted leading-relaxed">{c.v}</p>
+          </div>
+        ))}
+      </div>
+      <p class="text-[18px] text-ink mt-8">Generic tools treat these as edge cases. <strong class="font-semibold">Cadre is built around them.</strong></p>
+    </div>
+  </section>
+
+  <!-- SEPARATION OF POWERS -->
+  <section class="mesh-spine relative overflow-hidden">
+    <div class="relative max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <div class="max-w-[720px] mb-12">
+        <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-product-bright mb-4">How the AI works</div>
+        <h2 class="text-[26px] md:text-[34px] text-white">A separation of powers, the difference between explainable and indefensible.</h2>
+        <p class="text-[16px] text-white/65 leading-relaxed mt-5">
+          Cadre draws a hard line between what the model is allowed to do, what code decides, and what only a person can sign off. The boundary is enforced server-side, not by convention.
+        </p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4 reveal">
+        {powers.map((p) => (
+          <div class="flex flex-col rounded-lg border border-white/12 bg-white/[0.03] p-6">
+            <div class="font-mono text-[11px] uppercase tracking-[0.14em] text-product-bright font-semibold">{p.role}</div>
+            <h3 class="text-white text-[21px] font-semibold mt-2 mb-4">{p.title}</h3>
+            <ul class="flex flex-col gap-3 flex-1">
+              {p.points.map((pt) => (
+                <li class="flex items-start gap-2.5 text-[14px] text-white/75 leading-snug">
+                  <span class="text-product-bright mt-1.5 shrink-0 w-1.5 h-1.5 rounded-[1px] bg-product-bright"></span>{pt}
+                </li>
+              ))}
+            </ul>
+            <div class="mt-6 pt-4 border-t border-white/10 font-mono text-[10.5px] text-white/45">{p.stamp}</div>
+          </div>
+        ))}
+      </div>
+      <p class="text-[18px] md:text-[20px] text-white mt-10 max-w-[760px] leading-relaxed">
+        Every score is reproducible, every claim traces to evidence, and <strong class="font-medium text-product-bright">every decision has a human owner.</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- LIFECYCLE -->
+  <section class="bg-surface border-b border-line">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <div class="max-w-[680px] mb-10">
+        <h2 class="text-[26px] md:text-[34px]">One platform, the whole lifecycle.</h2>
+        <p class="text-[17px] text-muted leading-relaxed mt-5">From a raw demand to a deployed contractor, and back into the talent pool when the assignment ends.</p>
+      </div>
+      <div class="flex flex-wrap items-center gap-2 reveal">
+        {flow.map((step, i) => (
+          <>
+            <span class="font-mono text-[13px] font-semibold text-ink bg-paper border border-line rounded-md px-3.5 py-2.5">{step}</span>
+            {i < flow.length - 1 && <span class="text-product font-bold">→</span>}
+          </>
+        ))}
+      </div>
+      <div class="grid md:grid-cols-3 gap-5 mt-12 reveal">
+        {platform.map((p) => (
+          <div class="rounded-lg border border-line bg-surface p-6">
+            <div class="font-mono text-[11px] uppercase tracking-[0.12em] text-product font-semibold">{p.role}</div>
+            <h3 class="text-[18px] text-ink font-semibold mt-2 mb-2">{p.title}</h3>
+            <p class="text-[14.5px] text-muted leading-relaxed">{p.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPLIANCE -->
+  <section class="bg-paper">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <div class="max-w-[700px] mb-12">
+        <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-product mb-4">Compliance by construction</div>
+        <h2 class="text-[26px] md:text-[34px]">The EU AI Act and GDPR are designed in, not bolted on.</h2>
+        <p class="text-[17px] text-muted leading-relaxed mt-5">
+          Cadre treats high-risk-employment obligations as architecture. Each requirement maps to a mechanism that runs whether anyone is watching or not.
+        </p>
+      </div>
+      <div class="border-t border-line reveal">
+        {regs.map((r) => (
+          <div class="grid md:grid-cols-[150px_1fr] gap-3 md:gap-8 py-5 border-b border-line items-baseline">
+            <div>
+              <div class="font-mono text-[13px] font-semibold text-ink">{r.art}</div>
+              <div class="font-mono text-[10px] uppercase tracking-[0.12em] text-product mt-1.5">{r.label}</div>
+            </div>
+            <p class="text-[15.5px] text-muted leading-relaxed">{r.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FRAMEWORKS -->
+  <section class="bg-surface border-y border-line">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <div class="max-w-[700px] mb-10">
+        <h2 class="text-[26px] md:text-[34px]">The reference data institutional contracts actually run on.</h2>
+        <p class="text-[17px] text-muted leading-relaxed mt-5">
+          Cadre speaks the vocabulary of EU contracts natively, and hides the machinery so users work with people, not codes.
+        </p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 reveal">
+        {frameworks.map((f) => (
+          <div class="rounded-lg border border-line bg-paper p-6">
+            <div class="font-mono text-[10.5px] uppercase tracking-[0.12em] text-product font-semibold mb-3">{f.label}</div>
+            <h3 class="text-[17px] text-ink font-semibold mb-2">{f.title}</h3>
+            <p class="text-[14px] text-muted leading-relaxed">{f.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- VISIBILITY -->
+  <section class="mesh-spine relative overflow-hidden">
+    <div class="relative max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <div class="max-w-[720px] mb-12">
+        <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-product-bright mb-4">Visibility for every seat</div>
+        <h2 class="text-[26px] md:text-[34px] text-white">Role-specific dashboards, and clients watch their own SLAs live.</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8 reveal">
+        {stats.map((s) => (
+          <div>
+            <div class="text-[clamp(44px,6vw,60px)] font-bold tracking-tight text-white leading-none">{s.n}</div>
+            <div class="font-mono text-[11px] uppercase tracking-[0.12em] text-product-bright mt-4 mb-2">{s.label}</div>
+            <p class="text-[14px] text-white/65 leading-relaxed">{s.body}</p>
+          </div>
+        ))}
+      </div>
+      <div class="mt-12 rounded-lg border border-white/12 bg-white/[0.03] p-6 md:p-7 max-w-[800px] reveal">
+        <p class="text-[15.5px] text-white/75 leading-relaxed">
+          <strong class="text-white font-semibold">Customer transparency, built in.</strong> Clients see real-time SLA gauges, trends and per-demand status, exportable, plus a revocable read-only link for governance attendees without accounts. Quality surveys feed the score they see.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARCHITECTURE -->
+  <section class="bg-paper">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <div class="max-w-[700px] mb-10">
+        <h2 class="text-[26px] md:text-[34px]">A modern, mandated stack, entirely in EU regions.</h2>
+      </div>
+      <div class="flex flex-wrap gap-3 mb-8 reveal">
+        {stack.map((c) => (
+          <div class="rounded-md border border-line bg-surface px-4 py-3">
+            <div class="font-mono text-[13.5px] font-semibold text-ink">{c.t}</div>
+            <div class="text-[12px] text-faint mt-0.5">{c.s}</div>
+          </div>
+        ))}
+      </div>
+      <p class="text-[16px] text-muted leading-relaxed max-w-[760px]">
+        Cadre runs on Azure Container Apps from day one: <strong class="text-ink font-semibold">zero-downtime releases, automatic scaling for bursty AI workloads, scale-to-zero overnight and zone-redundant availability</strong>, with Kubernetes available as an escape hatch should scale ever demand it.
+      </p>
+      <div class="flex flex-wrap gap-x-7 gap-y-3 mt-7">
+        {archFoot.map((f) => (
+          <span class="flex items-center gap-2 font-mono text-[12.5px] text-muted">
+            <span class="w-1.5 h-1.5 rounded-full bg-product"></span>{f}
+          </span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="mesh-spine relative overflow-hidden">
+    <div class="grid-faint absolute inset-0 opacity-[0.14]" aria-hidden="true"></div>
+    <div class="relative max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-24">
+      <h2 class="text-[clamp(28px,4.4vw,44px)] text-white max-w-[720px]">Built for the institutions that <span class="italic text-product-bright">get audited</span>.</h2>
+      <p class="text-[18px] text-white/70 leading-relaxed max-w-[600px] mt-5 mb-8">
+        If your contracts come with SLAs, framework data and a seven-year paper trail, we should talk. We can walk you through the core screens against your own recruiter and service-manager workflows.
+      </p>
+      <Button href="/contact" variant="product">Talk to us about Cadre</Button>
+    </div>
+  </section>
+</Base>

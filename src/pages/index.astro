@@ -1,0 +1,237 @@
+---
+import Base from "../layouts/Base.astro";
+import SectionLabel from "../components/SectionLabel.astro";
+import { DoorCard } from "../components/DoorCard";
+import { TrustPill } from "../components/TrustPill";
+import { ProductCard } from "../components/ProductCard";
+import { TeamGrid } from "../components/TeamGrid";
+import { DualCTA } from "../components/DualCTA";
+import { Button } from "../components/Button";
+import { withBase } from "../utils/url";
+
+const stats = [
+  { big: "3×", label: "tender throughput, two-person team" },
+  { big: "~70%", label: "faster CV evaluation" },
+  { big: "EU-wide", label: "public-sector delivery" },
+];
+
+const sectors = ["Law enforcement", "Air traffic management", "EU procurement programmes", "+ enterprise"];
+
+const products = [
+  { name: "OWL Ops", job: "delivery ops", href: "/products/owl-ops", description: "Run live delivery without the spreadsheet sprawl." },
+  { name: "OWL Bid Team", job: "AI bid team", href: "/products/owl-bid-team", description: "Eight specialist agents run the full bid process." },
+  { name: "OWL Brain", job: "knowledge core", href: "/products/owl-brain", description: "Your won bids, reusable as a living knowledge base." },
+  { name: "Tender Intel", job: "market radar", href: "/products/tender-intel", description: "See the public-sector pipeline before rivals do." },
+  { name: "CVInsight", job: "CV evaluation", href: "/products/cvinsight", description: "Score and shortlist candidates, defensibly." },
+  { name: "Cadre", job: "EU staffing", href: "/products/cadre", description: "AI staffing for EU institutions, built to pass an audit." },
+];
+
+const insights = [
+  { title: "What AI actually changes about a tender response", meta: "Article", read: "6 min" },
+  { title: "Reading the EU procurement pipeline before your rivals", meta: "Article", read: "8 min" },
+  { title: "Evaluating 400 CVs in an afternoon, defensibly", meta: "Article", read: "5 min" },
+];
+
+// Founders (compact strip; bios live on /about)
+const team = [
+  { name: "Lee Nicholson", role: "CEO", photo: "/images/lee-nicholson.webp" },
+  { name: "Mark Ebden", role: "CTO", photo: "/images/mark-ebden.webp" },
+  { name: "John Jones", role: "Chief Sales Architect", photo: "/images/john-jones.webp" },
+];
+---
+
+<Base title="Outcome Works · Built to win the work that's hard to win">
+  <!-- HERO - asymmetric: thesis left, brand-door motif right, fork below -->
+  <section class="bg-paper border-b border-line overflow-hidden">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 pt-16 pb-14 md:pt-20 md:pb-16">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        <div class="lg:col-span-7">
+          <SectionLabel text="Outcome Works Limited · One brand, two doors" tone="spine" class="mb-6" />
+          <h1 class="max-w-[15ch]">Built to win the work that's hard to win.</h1>
+          <p class="lede mt-5">
+            AI advisory, bid support and the OWL toolset, for teams competing
+            in public-sector and enterprise procurement.
+          </p>
+        </div>
+
+        <!-- Brand owl as the hero visual, on the navy mesh ground -->
+        <div class="lg:col-span-5">
+          <div class="mesh-spine relative rounded-lg px-8 py-12 md:px-10 md:py-14 overflow-hidden flex flex-col items-center">
+            <div class="grid-faint absolute inset-0 opacity-[0.18]" aria-hidden="true"></div>
+            <img
+              src={withBase("/owl.png")}
+              alt=""
+              aria-hidden="true"
+              width="200"
+              height="244"
+              class="relative w-[clamp(150px,45%,210px)] h-auto drop-shadow-[0_16px_44px_rgba(0,0,0,0.4)]"
+            />
+            <p class="relative text-white/60 text-[13.5px] mt-8 text-center leading-relaxed max-w-[32ch]">
+              Two eyes, two doors. Hire the people, or run the software they built.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- The fork itself - primary CTA -->
+      <div class="grid sm:grid-cols-2 gap-4 mt-12">
+        <DoorCard
+          variant="consult"
+          eyebrow="I want a partner"
+          title="Work with our team"
+          body="Advisory and hands-on bid & proposal support."
+          ctaLabel="Explore consultancy"
+          href="/consultancy"
+        />
+        <DoorCard
+          variant="product"
+          eyebrow="I want a tool"
+          title="Run the OWL suite"
+          body="Software you operate yourself, from day one."
+          ctaLabel="See the products"
+          href="/products"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF RAIL - credibility as a horizontal data strip (no eyebrow) -->
+  <section class="bg-surface border-b border-line reveal">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-12 md:py-14">
+      <div class="grid md:grid-cols-[1.1fr_1fr] gap-10 md:gap-14 items-center">
+        <div class="grid grid-cols-3 gap-6">
+          {stats.map((s) => (
+            <div>
+              <div class="text-[clamp(30px,4vw,44px)] font-bold tracking-tight text-ink leading-none">{s.big}</div>
+              <div class="text-[13px] text-muted mt-2 leading-snug max-w-[20ch]">{s.label}</div>
+            </div>
+          ))}
+        </div>
+        <div class="md:border-l md:border-line md:pl-12">
+          <div class="flex flex-wrap gap-2 mb-4">
+            {sectors.map((c) => <TrustPill text={c} tone="spine" />)}
+          </div>
+          <p class="text-[13.5px] text-muted leading-relaxed max-w-[46ch]">
+            Names are under NDA, so we lead with the sector and the measured
+            outcome, the register cautious public-sector buyers trust.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TWO PATHS, EXPANDED - paired feature panels (eyebrow #2) -->
+  <section class="bg-paper">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <SectionLabel text="Two paths, one team" tone="spine" class="mb-8" />
+      <div class="grid md:grid-cols-2 gap-4 reveal">
+        <div class="rounded-lg border border-consult/40 bg-consult-wash/50 p-7 md:p-8">
+          <div class="font-mono text-[10.5px] uppercase tracking-[0.12em] text-consult">Consultancy</div>
+          <h2 class="text-[24px] md:text-[28px] mt-2 mb-3">Work with our team</h2>
+          <p class="text-[14.5px] text-muted leading-relaxed mb-5">
+            When the work is high-stakes and the deadline is real, we sit alongside
+            your team, shaping AI strategy, writing winning bids, and building the
+            tools you can't buy off the shelf.
+          </p>
+          <ul class="flex flex-col gap-2 text-[14px] text-ink mb-6">
+            <li>AI Advisory: strategy and practical AI</li>
+            <li>Bid & Proposal Support: tender response and win strategy</li>
+            <li>Enterprise Tooling: bespoke builds</li>
+          </ul>
+          <Button href="/consultancy" variant="consult">Explore consultancy</Button>
+        </div>
+        <div class="rounded-lg border border-product/40 bg-product-wash/50 p-7 md:p-8">
+          <div class="font-mono text-[10.5px] uppercase tracking-[0.12em] text-product">Products</div>
+          <h2 class="text-[24px] md:text-[28px] mt-2 mb-3">Run the OWL suite</h2>
+          <p class="text-[14.5px] text-muted leading-relaxed mb-5">
+            The same capability, productised. Software you operate yourself, built
+            from years of doing this work by hand, so you don't have to.
+          </p>
+          <ul class="flex flex-col gap-2 text-[14px] text-ink mb-6">
+            <li>Five focused tools across the bid lifecycle</li>
+            <li>Each shown running, not just described</li>
+            <li>Demos and pricing on every product page</li>
+          </ul>
+          <Button href="/products" variant="product">See the products</Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED CASE - number-first editorial band (no eyebrow) -->
+  <section class="bg-ink mesh-spine">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-14 items-center reveal">
+        <div>
+          <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-product-bright mb-4">Featured case study</div>
+          <div class="text-[clamp(56px,9vw,96px)] font-bold leading-[0.9] tracking-tight text-white">3×</div>
+          <div class="font-mono text-[12px] uppercase tracking-[0.14em] text-white/55 mt-3">tenders per month</div>
+        </div>
+        <div>
+          <div class="kicker !text-white/45 mb-3">Sector-led · unnamed client</div>
+          <h2 class="text-[24px] md:text-[30px] text-white mb-4">A two-person team, tripling its tender throughput.</h2>
+          <p class="text-[15px] text-white/65 leading-relaxed mb-6 max-w-[52ch]">
+            By pairing hands-on bid support with the OWL toolset, a small
+            specialist team moved from one tender a month to three, without adding
+            headcount and without dropping quality.
+          </p>
+          <a href={withBase("/case-studies")} class="inline-flex items-center gap-2 font-mono text-[12px] font-semibold text-product-bright hover:gap-3 transition-all">
+            Read the case →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OWL SUITE - card grid (eyebrow #3) -->
+  <section class="bg-paper">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <div class="flex items-end justify-between gap-4 mb-8 flex-wrap">
+        <div>
+          <SectionLabel text="The OWL suite" tone="product" class="mb-3" />
+          <h2 class="text-[26px] md:text-[32px]">Six tools across the bid and staffing lifecycle.</h2>
+        </div>
+        <a href={withBase("/products")} class="font-mono text-[12px] text-product hover:underline underline-offset-4 shrink-0">All products →</a>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 reveal">
+        {products.map((p) => <ProductCard name={p.name} job={p.job} href={p.href} description={p.description} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- INSIGHTS - editorial list, not equal cards (no eyebrow) -->
+  <section class="bg-surface border-y border-line">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <div class="flex items-end justify-between gap-4 mb-8 flex-wrap">
+        <h2 class="text-[26px] md:text-[32px]">Insights</h2>
+        <a href={withBase("/insights")} class="font-mono text-[12px] text-consult hover:underline underline-offset-4 shrink-0">All insights →</a>
+      </div>
+      <ul class="divide-y divide-line border-t border-line reveal">
+        {insights.map((a) => (
+          <li>
+            <a href={withBase("/insights")} class="group flex items-center gap-5 py-5 md:py-6">
+              <div class="flex-1">
+                <h3 class="text-[18px] md:text-[20px] font-semibold text-ink leading-snug group-hover:text-consult transition-colors">{a.title}</h3>
+                <div class="font-mono text-[11px] text-faint mt-2 tracking-wide">{a.meta} · {a.read}</div>
+              </div>
+              <span class="font-mono text-[13px] text-consult opacity-0 group-hover:opacity-100 transition-opacity shrink-0">Read →</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- PEOPLE - inline trust strip (no eyebrow) -->
+  <section class="bg-paper">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-14">
+      <div class="flex items-center justify-between gap-6 flex-wrap">
+        <TeamGrid members={team} variant="compact" />
+        <a href={withBase("/about")} class="font-mono text-[12px] text-ink hover:underline underline-offset-4 shrink-0">Meet the team →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DUAL CTA - the fork, closing (dark band) -->
+  <DualCTA />
+</Base>

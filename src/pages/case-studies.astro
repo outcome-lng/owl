@@ -1,0 +1,69 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import { CaseMetric } from "../components/CaseMetric";
+import { DualCTA } from "../components/DualCTA";
+
+const cases = [
+  {
+    metric: "3×",
+    metricLabel: "tenders / month",
+    sector: "Law enforcement · unnamed client",
+    heading: "A two-person team, tripling its tender throughput",
+    body: "Hands-on bid support plus the OWL toolset took a specialist team from one tender a month to three: winnable bids answered to standard, with no extra headcount.",
+    tone: "consult",
+  },
+  {
+    metric: "~70%",
+    metricLabel: "faster CV evaluation",
+    sector: "Resourcing & frameworks · unnamed client",
+    heading: "A week of CV review, compressed to an afternoon",
+    body: "CVInsight scored high volumes of CVs against precise criteria, consistently, and with a defensible audit trail that stands up to challenge.",
+    tone: "product",
+  },
+  {
+    metric: "EU-wide",
+    metricLabel: "pipeline coverage",
+    sector: "Air traffic management · unnamed client",
+    heading: "Seeing the opportunities early, across borders",
+    body: "Tender Intel widened the field of view to the full EU public-sector pipeline, surfacing relevant opportunities early enough to shape a winning response.",
+    tone: "product",
+  },
+];
+---
+
+<Base
+  title="Case Studies · Outcome Works"
+  description="Sector-led, quantified outcomes from public-sector and enterprise procurement work. NDAs block names; the numbers speak."
+>
+  <PageHero
+    kicker="Case Studies"
+    tone="spine"
+    title="Outcomes, not anecdotes."
+    lede="NDAs and the sensitivity of the work mean we rarely name clients. So we lead with the category and the quantified result, which is what a risk-averse buyer actually wants to see."
+  />
+
+  <section class="bg-paper">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <h2 class="text-[26px] md:text-[32px] mb-10">Selected work.</h2>
+      <div class="flex flex-col gap-4 reveal">
+        {cases.map((c) => (
+          <CaseMetric
+            metric={c.metric}
+            metricLabel={c.metricLabel}
+            sector={c.sector}
+            heading={c.heading}
+            body={c.body}
+            tone={c.tone as "consult" | "product"}
+          />
+        ))}
+      </div>
+      <p class="text-[13.5px] text-muted mt-8 max-w-[60ch] leading-relaxed">
+        {/* PLACEHOLDER_CASE_DETAIL - individual case-study detail pages can be added as the portfolio grows. */}
+        More detail available under NDA on request.
+      </p>
+    </div>
+  </section>
+
+  <DualCTA />
+</Base>

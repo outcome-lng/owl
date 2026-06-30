@@ -1,0 +1,316 @@
+---
+import Base from "../../layouts/Base.astro";
+import { Button } from "../../components/Button";
+
+// OWL Bid Team — a member of the OWL suite with a rich dedicated page
+// (richer than the standard JTBD [slug] template). Content adapted from the
+// product overview; brand voice applies (no em-dashes).
+
+const heroChips = [
+  "8 specialist agents",
+  "PIN / Market Engagement / ITT",
+  "Entra ID SSO / RBAC / audit trail",
+  "Client-data isolation by design",
+];
+
+const challenge = [
+  { k: "⅓ the time", label: "Delivery speed", v: "Tender artefacts produced in roughly a third of the time bid development normally takes, a direct, repeated saving in both time and senior cost." },
+  { k: "7 tenders", label: "Live delivery", v: "Seven client tenders delivered through the platform across more than three months of live use, each shaped while the opportunity was still open." },
+  { k: "8 agents", label: "Specialist roles", v: "Modelled on how a real bid team works: qualify, analyse, strategise, design, price, draft, then tear it apart, with a named specialist owning each step." },
+  { k: "6 gates", label: "Quality gates", v: "The full ITT track gates the work at six formal go/no-go points, from Bid/No-Bid through to Final Approval, exactly where a human team would stop and decide." },
+];
+
+const powers = [
+  {
+    role: "The agents draft", title: "Assist",
+    points: [
+      "Parse the RFP and requirement into structured, cited evidence",
+      "Draft bid/no-bid recommendations, win themes, storyboards and pricing analysis",
+      "Retrieve from your corporate and deal knowledge so drafts cite real material, not invention",
+    ],
+    stamp: "version-pinned prompts / grounded retrieval / every claim sourced",
+  },
+  {
+    role: "The platform enforces", title: "Govern",
+    points: [
+      "Agents may only write to an allowlisted set of paths, never anywhere else",
+      "Retrieved material is fenced as data the model reads, never instructions it obeys",
+      "Role-based access checked on every API route, with isolation enforced in the database",
+    ],
+    stamp: "prompt-injection fenced / RBAC on every route / tested in CI",
+  },
+  {
+    role: "Humans decide", title: "Approve",
+    points: [
+      "Nothing advances on AI output alone, phases are gated by go/no-go calls",
+      "One phase's output becomes the next phase's briefing, owned by a named role",
+      "A Red Team agent stress-tests the response before a human signs the submission",
+    ],
+    stamp: "six quality gates / phase hand-offs / human owner per gate",
+  },
+];
+
+const pipeline = ["Qualify", "Analyse", "Strategy", "Solution", "Price", "Draft", "Red team", "Approve"];
+
+const tracks = [
+  { kick: "Three tender shapes", title: "Right-sized tracks", body: "A lightweight three-phase track for an early Prior Information Notice, a four-phase Market Engagement track to shape a requirement, and the full nine-phase ITT/RFP response. A bid is promoted from one stage to the next as the opportunity matures." },
+  { kick: "Two knowledge brains", title: "Grounded in evidence", body: "A per-organisation corporate brain of reusable case studies and capabilities, plus a per-bid deal brain of the tender's own documents. An ingestion pipeline chunks, embeds and indexes uploads so agents draft from real material." },
+  { kick: "Editable skills", title: "Your method, not ours", body: "Each agent is driven by its own editable skill brief and contributes a defined set of deliverables. Tune the briefs to your house style and the work of one phase becomes the briefing context for the next." },
+];
+
+const specialists = [
+  { phase: "Phase 01", title: "Discovery", body: "Reads the opportunity and the tender pack, surfaces the requirement and the questions that decide whether it's worth bidding." },
+  { phase: "Phase 02", title: "Bid Manager", body: "Frames the bid/no-bid case, the timeline and the compliance shape of the response." },
+  { phase: "Phase 03", title: "Bid Director", body: "Sets the win strategy and win themes, the argument the whole response has to carry." },
+  { phase: "Phase 04", title: "Solution Architect", body: "Designs the solution against the requirement, with the evidence to make it credible." },
+  { phase: "Phase 05", title: "Financial Analyst", body: "Builds the pricing analysis and commercial position, tested against the ceilings that matter." },
+  { phase: "Phase 06", title: "Proposal Writer", body: "Turns the storyboard into branded, compliant draft answers grounded in retrieved evidence." },
+  { phase: "Phase 07", title: "Sales Architect", body: "Sharpens the positioning and the narrative so the response reads as a win, not a form." },
+  { phase: "Phase 08", title: "Red Team Reviewer", body: "Tears the response apart before submission, the adversarial pass a real bid team never skips." },
+];
+
+const trust = [
+  { k: "Isolation", label: "Tenant boundary", desc: "Separate client workspaces over isolated data, with isolation enforced in the database, not by UI convention. Client document bytes stay off OWL's database entirely." },
+  { k: "Broker", label: "Document I/O", desc: "Document access runs through a single broker service that is read-only, carries a short-lived signed token scoped to one tenant per call, and logs an allowlist of fields with no document content." },
+  { k: "Injection", label: "Prompt safety", desc: "Agents may only ever write to an allowlisted set of paths, and retrieved material is fenced off as data the model reads, never as instructions it obeys." },
+  { k: "RBAC", label: "Access control", desc: "Role-based access is enforced on every API route and verified by automated tests that fail the build if any route skips them, a claim the code keeps, not the README." },
+  { k: "Audit", label: "Reconstruction", desc: "An append-only trail records that a document was touched, using a hashed identifier and never the content, so any decision can be reconstructed after the fact." },
+  { k: "IPR", label: "OWL infrastructure", desc: "Skills, prompts and agent logic never leave OWL infrastructure. Client bytes transit OWL in memory only and are never persisted. Storage and search are pluggable adapters." },
+];
+
+const stats = [
+  { n: "2", label: "Knowledge brains", body: "Corporate and deal knowledge bases, retrieved and cited so drafts stand on real evidence." },
+  { n: "9", label: "Phases, full ITT track", body: "The complete response sequence with six formal quality gates from Bid/No-Bid to Final Approval." },
+  { n: "100%", label: "Routes RBAC-tested", body: "Access control and audit logging enforced by tests that fail the build if a route skips them." },
+];
+
+const stack = [
+  { t: "Next.js 14", s: "TypeScript app" },
+  { t: "Claude", s: "Agent reasoning, via Azure Foundry" },
+  { t: "PostgreSQL + pgvector", s: "State + vector search" },
+  { t: "Azure Blob", s: "Client storage tenant" },
+  { t: "Fastify broker", s: "Scoped-token document I/O" },
+  { t: "BullMQ + Redis", s: "Ingestion pipeline" },
+  { t: "Auth.js + Entra ID", s: "Single sign-on" },
+];
+
+const infra = ["EU data residency throughout", "Per-tenant isolation in the database", "Client bytes never persisted on OWL", "OWL IPR never leaves OWL infrastructure"];
+---
+
+<Base
+  title="OWL Bid Team · OWL suite · Outcome Works"
+  description="OWL Bid Team runs eight specialist AI agents through a structured bid process, from a raw opportunity to decision-grade tender artefacts, grounded in your own evidence and gated where a human team would decide."
+>
+  <!-- HERO -->
+  <section class="mesh-spine relative overflow-hidden">
+    <div class="grid-faint absolute inset-0 opacity-[0.14]" aria-hidden="true"></div>
+    <div class="relative max-w-[1080px] mx-auto px-5 sm:px-6 pt-16 pb-20 md:pt-20 md:pb-24">
+      <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-product-bright mb-5">OWL suite · Bid Team</div>
+      <h1 class="max-w-[20ch] text-white">Tender responses run like a real bid team, <span class="italic text-product-bright">delivered in a third of the time</span>.</h1>
+      <p class="mt-6 text-[clamp(17px,2vw,20px)] text-white/70 leading-relaxed max-w-[62ch]">
+        OWL Bid Team is a single platform that runs a team of eight specialist AI agents through a structured bid process, from a raw opportunity to decision-grade tender artefacts, grounded in your own evidence and gated where a human team would stop and decide.
+      </p>
+      <div class="flex flex-wrap gap-2.5 mt-8">
+        {heroChips.map((c) => (
+          <span class="font-mono text-[11.5px] text-white/70 border border-white/15 rounded-full px-3.5 py-1.5">{c}</span>
+        ))}
+      </div>
+      <div class="mt-9">
+        <Button href="/contact" variant="product">Talk to us about Bid Team</Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHALLENGE -->
+  <section class="bg-paper">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <div class="max-w-[700px] mb-12">
+        <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-product mb-4">The challenge</div>
+        <h2 class="text-[26px] md:text-[34px]">Bidding is a discipline, not a writing task.</h2>
+        <p class="text-[17px] text-muted leading-relaxed mt-5">
+          A single Invitation to Tender pulls in bid managers, solution architects, pricing analysts and writers, each producing a piece of a response that has to be compliant, coherent and competitive against a hard deadline. The bottleneck is rarely a lack of expertise. It is the time to get from a blank page to a credible first draft of the thinking.
+        </p>
+      </div>
+      <div class="border-t border-line reveal">
+        {challenge.map((c) => (
+          <div class="grid md:grid-cols-[180px_1fr] gap-4 md:gap-10 py-6 border-b border-line items-baseline">
+            <div>
+              <div class="text-[28px] md:text-[30px] font-bold tracking-tight text-ink leading-none">{c.k}</div>
+              <div class="font-mono text-[10.5px] uppercase tracking-[0.12em] text-product mt-2">{c.label}</div>
+            </div>
+            <p class="text-[15.5px] text-muted leading-relaxed">{c.v}</p>
+          </div>
+        ))}
+      </div>
+      <p class="text-[18px] text-ink mt-8">Generic AI writes paragraphs. <strong class="font-semibold">OWL Bid Team runs the process.</strong></p>
+    </div>
+  </section>
+
+  <!-- HOW THE AI WORKS -->
+  <section class="mesh-spine relative overflow-hidden">
+    <div class="relative max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <div class="max-w-[720px] mb-12">
+        <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-product-bright mb-4">How the AI works</div>
+        <h2 class="text-[26px] md:text-[34px] text-white">A separation of powers, the difference between persuasive and defensible.</h2>
+        <p class="text-[16px] text-white/65 leading-relaxed mt-5">
+          OWL Bid Team draws a hard line between what the agents are allowed to draft, what the platform enforces, and what a human signs off. The model produces the thinking; it never holds the keys.
+        </p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4 reveal">
+        {powers.map((p) => (
+          <div class="flex flex-col rounded-lg border border-white/12 bg-white/[0.03] p-6">
+            <div class="font-mono text-[11px] uppercase tracking-[0.14em] text-product-bright font-semibold">{p.role}</div>
+            <h3 class="text-white text-[21px] font-semibold mt-2 mb-4">{p.title}</h3>
+            <ul class="flex flex-col gap-3 flex-1">
+              {p.points.map((pt) => (
+                <li class="flex items-start gap-2.5 text-[14px] text-white/75 leading-snug">
+                  <span class="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-[1px] bg-product-bright"></span>{pt}
+                </li>
+              ))}
+            </ul>
+            <div class="mt-6 pt-4 border-t border-white/10 font-mono text-[10.5px] text-white/45">{p.stamp}</div>
+          </div>
+        ))}
+      </div>
+      <p class="text-[18px] md:text-[20px] text-white mt-10 max-w-[760px] leading-relaxed">
+        Every draft traces to evidence, every path is allowlisted, and <strong class="font-medium text-product-bright">every gate has a human owner.</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- LIFECYCLE -->
+  <section class="bg-surface border-b border-line">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <div class="max-w-[700px] mb-10">
+        <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-product mb-4">One platform, the whole bid</div>
+        <h2 class="text-[26px] md:text-[34px]">From a raw opportunity to a submitted response.</h2>
+        <p class="text-[17px] text-muted leading-relaxed mt-5">The work moves through the same sequence a real team would use, each phase handled by its specialist and gated before the next begins.</p>
+      </div>
+      <div class="flex flex-wrap items-center gap-2 reveal">
+        {pipeline.map((step, i) => (
+          <>
+            <span class="font-mono text-[13px] font-semibold text-ink bg-paper border border-line rounded-md px-3.5 py-2.5">{step}</span>
+            {i < pipeline.length - 1 && <span class="text-product font-bold">→</span>}
+          </>
+        ))}
+      </div>
+      <div class="grid md:grid-cols-3 gap-5 mt-12 reveal">
+        {tracks.map((t) => (
+          <div class="rounded-lg border border-line bg-surface p-6">
+            <div class="font-mono text-[11px] uppercase tracking-[0.12em] text-product font-semibold">{t.kick}</div>
+            <h3 class="text-[18px] text-ink font-semibold mt-2 mb-2">{t.title}</h3>
+            <p class="text-[14.5px] text-muted leading-relaxed">{t.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- THE EIGHT SPECIALISTS -->
+  <section class="bg-paper">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <div class="max-w-[700px] mb-10">
+        <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-product mb-4">The bid team</div>
+        <h2 class="text-[26px] md:text-[34px]">Eight specialists, one structured handover.</h2>
+        <p class="text-[17px] text-muted leading-relaxed mt-5">Not a single chatbot, but a sequence of disciplines, each with its own brief, contributing decision-grade artefacts and handing off automatically.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 reveal">
+        {specialists.map((s) => (
+          <div class="rounded-lg border border-line bg-surface p-5">
+            <div class="font-mono text-[10.5px] uppercase tracking-[0.12em] text-faint">{s.phase}</div>
+            <h3 class="text-[17px] text-ink font-semibold mt-1 mb-2">{s.title}</h3>
+            <p class="text-[14px] text-muted leading-relaxed">{s.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST / DATA BOUNDARY -->
+  <section class="bg-surface border-y border-line">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <div class="max-w-[720px] mb-12">
+        <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-product mb-4">Trust by construction</div>
+        <h2 class="text-[26px] md:text-[34px]">The data boundary is designed in, not bolted on.</h2>
+        <p class="text-[17px] text-muted leading-relaxed mt-5">
+          Because the platform is built to run on a client's own material, every architectural decision answers one question: does this leak client data out, or OWL's IPR in? Each requirement maps to a mechanism, not a policy page.
+        </p>
+      </div>
+      <div class="border-t border-line reveal">
+        {trust.map((r) => (
+          <div class="grid md:grid-cols-[150px_1fr] gap-3 md:gap-8 py-5 border-b border-line items-baseline">
+            <div>
+              <div class="font-mono text-[14px] font-semibold text-ink">{r.k}</div>
+              <div class="font-mono text-[10px] uppercase tracking-[0.12em] text-product mt-1.5">{r.label}</div>
+            </div>
+            <p class="text-[15.5px] text-muted leading-relaxed">{r.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- EVIDENCE / VISIBILITY -->
+  <section class="mesh-spine relative overflow-hidden">
+    <div class="relative max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <div class="max-w-[720px] mb-12">
+        <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-product-bright mb-4">Evidence, not assertion</div>
+        <h2 class="text-[26px] md:text-[34px] text-white">Every artefact is traceable, and the structure is the proof.</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8 reveal">
+        {stats.map((s) => (
+          <div>
+            <div class="text-[clamp(44px,6vw,60px)] font-bold tracking-tight text-white leading-none">{s.n}</div>
+            <div class="font-mono text-[11px] uppercase tracking-[0.12em] text-product-bright mt-4 mb-2">{s.label}</div>
+            <p class="text-[14px] text-white/65 leading-relaxed">{s.body}</p>
+          </div>
+        ))}
+      </div>
+      <div class="mt-12 rounded-lg border border-white/12 bg-white/[0.03] p-6 md:p-7 max-w-[820px] reveal">
+        <p class="text-[15.5px] text-white/75 leading-relaxed">
+          <strong class="text-white font-semibold">Built to put in front of clients.</strong> The output is not a wall of generated text. It is the set of decision-grade documents a bid team produces: bid/no-bid recommendations, competitive intelligence, win themes, storyboards, solution designs and pricing strategy, each one sourced and reconstructable.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECH STACK -->
+  <section class="bg-paper">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <div class="max-w-[700px] mb-8">
+        <h2 class="text-[26px] md:text-[34px]">A modern stack, hosted in EU regions.</h2>
+      </div>
+      <div class="flex flex-wrap gap-3 reveal">
+        {stack.map((c) => (
+          <div class="rounded-md border border-line bg-surface px-4 py-3">
+            <div class="font-mono text-[13.5px] font-semibold text-ink">{c.t}</div>
+            <div class="text-[12px] text-faint mt-0.5">{c.s}</div>
+          </div>
+        ))}
+      </div>
+      <p class="text-[16px] text-muted leading-relaxed max-w-[760px] mt-8">
+        OWL Bid Team runs as a single multi-tenant SaaS in a European Azure region, with storage and search behind pluggable adapters: Azure today, the same code ready to run against a client's own cloud tomorrow.
+      </p>
+      <div class="flex flex-wrap gap-x-7 gap-y-3 mt-7">
+        {infra.map((f) => (
+          <span class="flex items-center gap-2 font-mono text-[12.5px] text-muted">
+            <span class="w-1.5 h-1.5 rounded-full bg-product"></span>{f}
+          </span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING CTA -->
+  <section class="mesh-spine relative overflow-hidden">
+    <div class="grid-faint absolute inset-0 opacity-[0.14]" aria-hidden="true"></div>
+    <div class="relative max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-24">
+      <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-product-bright mb-4">Talk to us</div>
+      <h2 class="text-[clamp(28px,4.4vw,44px)] text-white max-w-[18ch]">Built for the teams that have to <span class="italic text-product-bright">win the work that's hard to win</span>.</h2>
+      <p class="text-[18px] text-white/70 leading-relaxed max-w-[56ch] mt-5 mb-8">
+        If you bid for public-sector or enterprise contracts and need decision-grade artefacts fast enough to shape a live opportunity, we should talk.
+      </p>
+      <Button href="/contact" variant="product">Talk to us about Bid Team</Button>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,140 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHero from "../../components/PageHero.astro";
+import SectionLabel from "../../components/SectionLabel.astro";
+import { DualCTA } from "../../components/DualCTA";
+import { withBase } from "../../utils/url";
+
+export function getStaticPaths() {
+  const products = [
+    {
+      slug: "owl-ops",
+      name: "OWL Ops",
+      job: "delivery ops",
+      headline: "Run a high-throughput bid operation without the chaos.",
+      lede: "OWL Ops is the day-to-day engine behind a small team punching well above its weight, with every bid, deadline and owner in one place.",
+      jobHeading: "The job",
+      jobBody: [
+        "When a small team is answering several tenders at once, the work isn't the writing, it's the coordination: who owns what, what's due when, which version is current, and what still needs sign-off.",
+        "OWL Ops removes that overhead. It gives a two- or three-person team the operational grip of a much larger bid function, so the energy goes into winning, not chasing.",
+      ],
+      features: ["Every live bid, owner and deadline at a glance", "Version and sign-off tracking built in", "Plugs into the rest of the OWL suite"],
+      metric: "3×",
+      metricLabel: "tender throughput",
+      metricNote: "What a two-person team achieved running Ops alongside hands-on bid support.",
+    },
+    {
+      slug: "owl-brain",
+      name: "OWL Brain",
+      job: "knowledge core",
+      headline: "Stop rewriting answers you've already written.",
+      lede: "OWL Brain is your organisation's reusable knowledge core: past answers, evidence and boilerplate, instantly retrievable when the next bid lands.",
+      jobHeading: "The job",
+      jobBody: [
+        "Every bid team rebuilds the same answers. The case study lives in someone's inbox, the accreditation in a folder no one can find, the perfect paragraph in a document from two years ago.",
+        "OWL Brain captures that institutional knowledge once and makes it searchable, so the right evidence is at your fingertips exactly when you need it.",
+      ],
+      features: ["Searchable library of past answers & evidence", "Surfaces the right material in context", "Grows more valuable with every bid"],
+      metric: "Hours",
+      metricLabel: "saved per response",
+      metricNote: "Time recovered from hunting for material you already had.",
+    },
+    {
+      slug: "tender-intel",
+      name: "Tender Intel",
+      job: "market radar",
+      headline: "See the opportunities before your rivals do.",
+      lede: "Tender Intel reads the procurement pipeline for you, surfacing and triaging the opportunities that fit, early enough to act.",
+      jobHeading: "The job",
+      jobBody: [
+        "By the time a tender hits your inbox, the well-prepared competitor has been shaping it for weeks. The advantage is in seeing the pipeline early, but the pipeline is vast, noisy and spread across dozens of portals.",
+        "Tender Intel watches the EU and public-sector pipeline and brings the relevant opportunities to you, triaged and ranked, so you spend your time on the ones worth winning.",
+      ],
+      features: ["Monitors EU & public-sector pipelines", "Filters to what's actually relevant", "Early signal, not last-minute scramble"],
+      metric: "EU-wide",
+      metricLabel: "pipeline coverage",
+      metricNote: "Public-sector opportunity, watched at the scale buyers operate.",
+    },
+    {
+      slug: "cvinsight",
+      name: "CVInsight",
+      job: "CV evaluation",
+      headline: "Evaluate hundreds of CVs in an afternoon, defensibly.",
+      lede: "CVInsight compresses high-volume CV evaluation from days to hours, with the audit trail to prove every decision.",
+      jobHeading: "The job",
+      jobBody: [
+        "Framework and resourcing bids often hinge on evaluating large volumes of CVs against precise criteria. Done by hand it's slow, inconsistent, and hard to defend if challenged.",
+        "CVInsight scores CVs against the criteria you set, fast and consistently, and records why, giving you a defensible, reviewable evaluation you can stand behind.",
+      ],
+      features: ["Scores against your exact criteria", "Consistent across hundreds of CVs", "Full, defensible audit trail"],
+      metric: "~70%",
+      metricLabel: "faster evaluation",
+      metricNote: "A week of review compressed into an afternoon.",
+    },
+  ];
+
+  return products.map((p) => ({ params: { slug: p.slug }, props: p }));
+}
+
+const p = Astro.props;
+---
+
+<Base
+  title={`${p.name} · OWL suite · Outcome Works`}
+  description={p.lede}
+>
+  <PageHero
+    kicker={`OWL · ${p.job}`}
+    tone="product"
+    title={p.headline}
+    lede={p.lede}
+    ctaLabel="Book a demo"
+    ctaHref="/contact"
+  />
+
+  <!-- The job — prose (keeps the page's one eyebrow) -->
+  <section class="bg-paper">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <SectionLabel text={p.jobHeading} tone="product" class="mb-8" />
+      <div class="max-w-[62ch] flex flex-col gap-4 reveal">
+        {p.jobBody.map((para) => <p class="text-[16px] text-muted leading-relaxed">{para}</p>)}
+      </div>
+    </div>
+  </section>
+
+  <!-- Shown running — split list + labeled product slot (no eyebrow) -->
+  <section class="bg-surface border-y border-line">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <h2 class="text-[26px] md:text-[32px] mb-10">Shown running.</h2>
+      <div class="grid md:grid-cols-[1fr_1.2fr] gap-8 items-center reveal">
+        <ul class="flex flex-col gap-3">
+          {p.features.map((f) => (
+            <li class="flex items-start gap-2.5 text-[15px] text-ink">
+              <span class="text-product mt-0.5">→</span>{f}
+            </li>
+          ))}
+        </ul>
+        <!-- PLACEHOLDER_PRODUCT_SCREENSHOT - replace with a real product capture -->
+        <div class="rounded-lg border border-line bg-product-wash/40 aspect-[16/10] flex items-center justify-center" aria-hidden="true">
+          <span class="font-mono text-[11px] text-product/60">{p.name} · product screenshot</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proof — number-first dark band (no eyebrow) -->
+  <section class="mesh-spine">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <div class="grid md:grid-cols-[200px_1fr] gap-6 md:gap-12 items-center reveal">
+        <div>
+          <div class="text-[clamp(44px,7vw,64px)] font-bold leading-none tracking-tight text-product-bright">{p.metric}</div>
+          <div class="font-mono text-[11px] text-white/55 mt-2 tracking-wide uppercase">{p.metricLabel}</div>
+        </div>
+        <p class="text-[16px] text-white/70 leading-relaxed">{p.metricNote}</p>
+      </div>
+      <a href={withBase("/products")} class="inline-block mt-8 font-mono text-[12px] text-product-bright hover:underline underline-offset-4">← All products</a>
+    </div>
+  </section>
+
+  <DualCTA productHeading={`See ${p.name} in a demo`} />
+</Base>
