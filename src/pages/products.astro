@@ -1,12 +1,13 @@
 ---
 import Base from "../layouts/Base.astro";
 import PageHero from "../components/PageHero.astro";
+import Figure from "../components/Figure.astro";
 import { ProductCard } from "../components/ProductCard";
 import { CaseMetric } from "../components/CaseMetric";
 import { DualCTA } from "../components/DualCTA";
 
 const products = [
-  { name: "OWL Ops", job: "delivery ops", href: "/products/owl-ops", description: "Run bid and delivery operations from one place, the day-to-day engine behind a high-throughput team." },
+  { name: "TalonOps", job: "field operations", href: "/products/talon-ops", description: "Connect planners, dispatchers, supervisors and field engineers into one live delivery model, from the first work order to final sign-off." },
   { name: "OWL Bid Team", job: "AI bid team", href: "/products/owl-bid-team", description: "Eight specialist AI agents run a structured bid process, from raw opportunity to decision-grade tender artefacts." },
   { name: "OWL Brain", job: "knowledge core", href: "/products/owl-brain", description: "Your organisation's reusable knowledge core: past answers, evidence and boilerplate, instantly retrievable." },
   { name: "Tender Intel", job: "market radar", href: "/products/tender-intel", description: "Read the procurement pipeline before your rivals: relevant opportunities surfaced and triaged early." },
@@ -17,7 +18,7 @@ const products = [
 
 <Base
   title="The OWL suite · Outcome Works"
-  description="The OWL suite: software you operate yourself across the bid and staffing lifecycle. OWL Ops, OWL Bid Team, OWL Brain, Tender Intel, CVInsight and Cadre."
+  description="The OWL suite: software you operate yourself across the bid and staffing lifecycle. TalonOps, OWL Bid Team, OWL Brain, Tender Intel, CVInsight and Cadre."
 >
   <PageHero
     kicker="Products · Run it yourself"
@@ -26,6 +27,8 @@ const products = [
     lede="Six focused tools across the bid and staffing lifecycle, built from years of doing this work by hand. Software you run from day one, with demos and pricing on every page."
     ctaLabel="Book a demo"
     ctaHref="/contact"
+    imageBase="products-hero"
+    imageAlt="A bid team operating the OWL suite themselves in a studio office, with live TalonOps dashboards on screen: your data, your process, your team, your outcomes"
   />
 
   <!-- The suite - card grid, 6 tools (3x2, no empty slot) -->
@@ -38,6 +41,12 @@ const products = [
           <ProductCard name={p.name} job={p.job} href={p.href} description={p.description} />
         ))}
       </div>
+      <Figure
+        base="products-core"
+        alt="The six OWL tools connected to one central knowledge core: shared evidence, answers and boilerplate flowing between Tender Intel, OWL Bid Team, TalonOps, OWL Brain, CVInsight and Cadre"
+        sizes="(min-width: 768px) 760px, 100vw"
+        class="mt-12 reveal max-w-[760px] mx-auto"
+      />
     </div>
   </section>
 

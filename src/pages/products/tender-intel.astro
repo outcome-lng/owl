@@ -1,6 +1,8 @@
 ---
 import Base from "../../layouts/Base.astro";
 import { Button } from "../../components/Button";
+import Figure from "../../components/Figure.astro";
+import { withBase } from "../../utils/url";
 
 // Tender Intel is a member of the OWL suite, but its scope (an eleven-year EU
 // procurement corpus, two-schema reconciliation, forecasting) warrants a richer
@@ -98,7 +100,18 @@ const archFoot = ["TED, the official EU source", "Idempotent, reproducible rebui
   <!-- HERO -->
   <section class="mesh-spine relative overflow-hidden">
     <div class="grid-faint absolute inset-0 opacity-[0.14]" aria-hidden="true"></div>
-    <div class="relative max-w-[1080px] mx-auto px-5 sm:px-6 pt-16 pb-20 md:pt-20 md:pb-24">
+    <!-- EU network map blended into the navy grid on the right -->
+    <img
+      src={withBase("/images/tender-intel-map-1600.webp")}
+      srcset={`${withBase("/images/tender-intel-map-1040.webp")} 1040w, ${withBase("/images/tender-intel-map-1600.webp")} 1600w`}
+      sizes="60vw"
+      alt=""
+      aria-hidden="true"
+      width="1672"
+      height="941"
+      class="hidden lg:block absolute right-0 top-0 h-full w-[58%] object-cover object-[center_right] pointer-events-none select-none opacity-90 [-webkit-mask-image:linear-gradient(to_right,transparent_12%,#000_70%)] [mask-image:linear-gradient(to_right,transparent_12%,#000_70%)]"
+    />
+    <div class="relative z-10 max-w-[1080px] mx-auto px-5 sm:px-6 pt-16 pb-20 md:pt-20 md:pb-24">
       <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-product-bright mb-5">OWL suite · Tender Intel</div>
       <h1 class="max-w-[18ch] text-white">See every EU public tender, <span class="italic text-product-bright">ranked for you</span>, the day it publishes.</h1>
       <p class="mt-6 text-[clamp(17px,2vw,20px)] text-white/70 leading-relaxed max-w-[60ch]">
@@ -196,6 +209,12 @@ const archFoot = ["TED, the official EU source", "Idempotent, reproducible rebui
           </div>
         ))}
       </div>
+      <Figure
+        base="tender-intel-workflow"
+        alt="A bid team reviewing the Tender Intel pipeline together, with opportunities ranked by stage from opportunities through pre-qualification, bid in progress, evaluation and awarded"
+        sizes="(min-width: 1080px) 1016px, 100vw"
+        class="mt-14 reveal"
+      />
     </div>
   </section>
 
@@ -241,6 +260,12 @@ const archFoot = ["TED, the official EU source", "Idempotent, reproducible rebui
           </div>
         ))}
       </div>
+      <Figure
+        base="tender-intel-dashboard"
+        alt="The Tender Intel opportunity-pipeline dashboard: total and weighted pipeline value, opportunities by stage from identify to won, pipeline by solution area and region, and a weighted pipeline forecast"
+        sizes="(min-width: 1080px) 1016px, 100vw"
+        class="mt-14 reveal"
+      />
     </div>
   </section>
 

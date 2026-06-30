@@ -1,0 +1,284 @@
+---
+import Base from "../../layouts/Base.astro";
+import { Button } from "../../components/Button";
+import Figure from "../../components/Figure.astro";
+import { withBase } from "../../utils/url";
+
+// TalonOps is the field-operations platform in the OWL suite. Its scope (live
+// workforce, GIS scheduling, mobile/offline field execution, back-office
+// integration) warrants a bespoke rich page, same pattern as Tender Intel,
+// Cadre and OWL Bid Team.
+
+const heroChips = [
+  "Live workforce",
+  "GIS scheduling",
+  "Mobile workforce",
+  "Digital inspections",
+  "Offline capable",
+];
+
+// Plan / Deliver / Control - the operating loop
+const powers = [
+  {
+    role: "Plan · Coordinate",
+    title: "Demand enters once and becomes planned work.",
+    points: [
+      "Create projects, inspections and work orders",
+      "Allocate engineers by skills, location and availability",
+      "Optimise routes automatically",
+      "Balance workloads across teams",
+    ],
+    stamp: "resource planning / GIS aware / workload balancing",
+  },
+  {
+    role: "Deliver · Execute",
+    title: "Field teams arrive with everything they need.",
+    points: [
+      "Mobile work orders",
+      "Digital forms",
+      "Photos and evidence capture",
+      "Offline working",
+      "Live progress updates",
+    ],
+    stamp: "mobile first / evidence captured / real-time sync",
+  },
+  {
+    role: "Control · Monitor",
+    title: "Supervisors see the operation as it happens.",
+    points: [
+      "Live project status",
+      "Engineer locations",
+      "Workload heatmaps",
+      "SLA monitoring",
+      "Escalations before deadlines slip",
+    ],
+    stamp: "real-time dashboards / exception driven / operational control",
+  },
+];
+
+const flow = ["Request", "Plan", "Schedule", "Execute", "Capture evidence", "Verify quality", "Inform customer", "Invoice & report"];
+
+// Shown running - what every assignment carries
+const assignment = ["an owner", "a priority", "a deadline", "live status", "captured evidence", "complete audit history"];
+
+const roles = [
+  { name: "Dispatcher", v: "Allocates and routes the day's work." },
+  { name: "Engineer", v: "Just today's jobs, on mobile, online or off." },
+  { name: "Supervisor", v: "Live status, locations and exceptions." },
+  { name: "Operations Manager", v: "Workload, SLAs and capacity across teams." },
+  { name: "Customer", v: "Live progress, without a single phone call." },
+  { name: "Commercial Manager", v: "Cost, billing and contract performance." },
+];
+
+const connected = [
+  "Work planned in the office appears instantly on engineers' devices.",
+  "Evidence captured on site updates management dashboards immediately.",
+  "Quality issues generate follow-up work automatically.",
+  "Customers receive updates without anyone making phone calls.",
+];
+
+const stack = ["Cloud-native", "Offline capable", "Mobile first", "GIS enabled", "Role-based security", "Real-time synchronisation", "API-first integration"];
+---
+
+<Base
+  title="TalonOps · OWL suite · Outcome Works"
+  description="TalonOps is the field-operations platform that connects planners, dispatchers, supervisors and field engineers into one live delivery model, from the first work order to final sign-off."
+>
+  <!-- HERO -->
+  <section class="mesh-spine relative overflow-hidden">
+    <div class="grid-faint absolute inset-0 opacity-[0.14]" aria-hidden="true"></div>
+    <div class="relative z-10 max-w-[1080px] mx-auto px-5 sm:px-6 pt-16 pb-20 md:pt-20 md:pb-24">
+      <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-product-bright mb-5">OWL suite · TalonOps</div>
+      <h1 class="max-w-[20ch] text-white">Field operations run like a <span class="italic text-product-bright">control room</span>, delivered in real time.</h1>
+      <p class="mt-6 text-[clamp(17px,2vw,20px)] text-white/70 leading-relaxed max-w-[64ch]">
+        TalonOps is the operational platform that connects planners, dispatchers, supervisors and field engineers into one live delivery model. From the first work order to final sign-off, every project, inspection and engineer remains visible, prioritised and accountable, whether the work is happening next door or across an entire country.
+      </p>
+      <div class="flex flex-wrap gap-2.5 mt-8">
+        {heroChips.map((c) => (
+          <span class="font-mono text-[11.5px] text-white/70 border border-white/15 rounded-full px-3.5 py-1.5">{c}</span>
+        ))}
+      </div>
+      <div class="mt-9">
+        <Button href="/contact" variant="product">Talk to us about TalonOps</Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHALLENGE -->
+  <section class="bg-paper">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-product mb-4">The challenge</div>
+      <div class="grid md:grid-cols-[1fr_1.3fr] gap-10 lg:gap-14 items-start reveal">
+        <div>
+          <h2 class="text-[26px] md:text-[34px]">Field delivery becomes chaos long before it becomes scale.</h2>
+          <p class="text-[17px] text-muted leading-relaxed mt-5">
+            Growing field operations quickly become disconnected. Schedulers work from spreadsheets, supervisors rely on phone calls, engineers complete paperwork in vans, and management only discovers problems after deadlines have slipped. The challenge is rarely the engineers themselves, it is coordinating hundreds of moving parts across people, locations and time.
+          </p>
+          <div class="border-t border-line mt-8 pt-8">
+            <h3 class="text-[20px] md:text-[23px]">Manual coordination doesn't scale. Operational visibility does.</h3>
+            <p class="text-[16px] text-muted leading-relaxed mt-4">
+              Phone calls, emails and disconnected systems create blind spots between the back office and the field. TalonOps keeps everyone working from the same live operational picture, so decisions are based on current information rather than yesterday's reports.
+            </p>
+          </div>
+        </div>
+        <Figure
+          base="talon-ops-control-room"
+          alt="The TalonOps operations control room: a live projects map, project status, today's schedule and resource utilisation on the wall display, dispatchers at their workstations, and a field engineer completing a mobile work order on site"
+          sizes="(min-width: 768px) 56vw, 100vw"
+        />
+      </div>
+      <p class="text-[18px] text-ink mt-10">Spreadsheets and phone calls coordinate work. <strong class="font-semibold">TalonOps runs the operation.</strong></p>
+    </div>
+  </section>
+
+  <!-- HOW IT'S BUILT -->
+  <section class="bg-surface border-y border-line">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <div class="max-w-[700px]">
+        <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-product mb-4">How it's built</div>
+        <h2 class="text-[26px] md:text-[34px]">One operational platform, every stakeholder connected.</h2>
+        <p class="text-[17px] text-muted leading-relaxed mt-5">
+          Every project, engineer, customer, asset and work order exists once and updates everywhere. Office teams schedule, field teams execute, supervisors monitor and customers receive live progress without duplicate administration.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE OPERATING LOOP: PLAN / DELIVER / CONTROL -->
+  <section class="mesh-spine relative overflow-hidden">
+    <div class="relative z-10 max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <div class="max-w-[720px] mb-12">
+        <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-product-bright mb-4">Plan, deliver, control</div>
+        <h2 class="text-[26px] md:text-[34px] text-white">One loop, from the back office to the van and back.</h2>
+        <p class="text-[16px] text-white/65 leading-relaxed mt-5">
+          The office plans the work, the field delivers it, and supervisors hold the whole operation in view, each role working the same live data rather than its own copy.
+        </p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4 reveal">
+        {powers.map((p) => (
+          <div class="flex flex-col rounded-lg border border-white/12 bg-white/[0.03] p-6">
+            <div class="font-mono text-[11px] uppercase tracking-[0.14em] text-product-bright font-semibold">{p.role}</div>
+            <h3 class="text-white text-[20px] font-semibold mt-2 mb-4 leading-snug">{p.title}</h3>
+            <ul class="flex flex-col gap-3 flex-1">
+              {p.points.map((pt) => (
+                <li class="flex items-start gap-2.5 text-[14px] text-white/75 leading-snug">
+                  <span class="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-[1px] bg-product-bright"></span>{pt}
+                </li>
+              ))}
+            </ul>
+            <div class="mt-6 pt-4 border-t border-white/10 font-mono text-[10.5px] text-white/45">{p.stamp}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKFLOW -->
+  <section class="bg-paper">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <div class="max-w-[680px] mb-10">
+        <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-product mb-4">From request to completion</div>
+        <h2 class="text-[26px] md:text-[34px]">Every task follows the same operational workflow.</h2>
+        <p class="text-[17px] text-muted leading-relaxed mt-5">Requests become planned work, planned work becomes scheduled activity, and the rest follows automatically, each step captured rather than remembered.</p>
+      </div>
+      <div class="flex flex-wrap items-center gap-2 reveal">
+        {flow.map((step, i) => (
+          <>
+            <span class="font-mono text-[13px] font-semibold text-ink bg-surface border border-line rounded-md px-3.5 py-2.5">{step}</span>
+            {i < flow.length - 1 && <span class="text-product font-bold">→</span>}
+          </>
+        ))}
+      </div>
+      <p class="text-[18px] text-ink mt-10">Quality is verified and customers are informed automatically. <strong class="font-semibold">Nothing relies on paperwork or memory.</strong></p>
+    </div>
+  </section>
+
+  <!-- SHOWN RUNNING -->
+  <section class="bg-surface border-y border-line">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <div class="max-w-[700px] mb-10">
+        <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-product mb-4">Shown running</div>
+        <h2 class="text-[26px] md:text-[34px]">Operations, not administration.</h2>
+        <p class="text-[17px] text-muted leading-relaxed mt-5">
+          TalonOps replaces disconnected spreadsheets, whiteboards and messaging groups with one operational workspace shared by office teams and field engineers. Every assignment carries its own accountability:
+        </p>
+      </div>
+      <Figure
+        base="talon-ops-programme"
+        alt="An operations manager reviewing the TalonOps programme dashboard: project status, overall progress, budget versus forecast, risks and team workload across the portfolio"
+        sizes="(min-width: 1080px) 1016px, 100vw"
+        class="mb-10 reveal"
+      />
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 reveal">
+        {assignment.map((a) => (
+          <div class="rounded-lg border border-line bg-paper px-5 py-4 font-mono text-[13px] text-ink">{a}</div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- VISIBILITY FOR EVERY ROLE -->
+  <section class="bg-paper">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <div class="max-w-[700px] mb-10">
+        <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-product mb-4">Visibility for every role</div>
+        <h2 class="text-[26px] md:text-[34px]">Every person sees only what matters to them.</h2>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 reveal">
+        {roles.map((r) => (
+          <div class="rounded-lg border border-line bg-surface p-5">
+            <h3 class="text-[17px] text-ink font-semibold mb-1.5">{r.name}</h3>
+            <p class="text-[14px] text-muted leading-relaxed">{r.v}</p>
+          </div>
+        ))}
+      </div>
+      <p class="text-[18px] text-ink mt-8">Executives receive live operational KPIs, while engineers simply receive today's work.</p>
+    </div>
+  </section>
+
+  <!-- EVERYTHING CONNECTED -->
+  <section class="mesh-spine relative overflow-hidden">
+    <div class="relative z-10 max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <div class="max-w-[720px] mb-12">
+        <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-product-bright mb-4">Everything connected</div>
+        <h2 class="text-[26px] md:text-[34px] text-white">Back office and field become one operation.</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-4 reveal">
+        {connected.map((c) => (
+          <div class="rounded-lg border border-white/12 bg-white/[0.03] p-6 text-[15.5px] text-white/80 leading-relaxed">{c}</div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- MODERN STACK -->
+  <section class="bg-paper">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+      <div class="max-w-[700px] mb-8">
+        <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-product mb-4">A modern operational stack</div>
+        <h2 class="text-[26px] md:text-[34px]">Built for organisations delivering work in the real world.</h2>
+      </div>
+      <div class="flex flex-wrap gap-3 mb-8 reveal">
+        {stack.map((c) => (
+          <span class="rounded-md border border-line bg-surface px-4 py-2.5 font-mono text-[13px] font-semibold text-ink">{c}</span>
+        ))}
+      </div>
+      <p class="text-[16px] text-muted leading-relaxed max-w-[760px]">
+        Everything is designed so hundreds of engineers can operate from one platform without losing operational control.
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="mesh-spine relative overflow-hidden">
+    <div class="grid-faint absolute inset-0 opacity-[0.14]" aria-hidden="true"></div>
+    <div class="relative z-10 max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-24">
+      <h2 class="text-[clamp(28px,4.4vw,44px)] text-white max-w-[760px]">Built for organisations where delivery <span class="italic text-product-bright">matters more than administration</span>.</h2>
+      <p class="text-[18px] text-white/70 leading-relaxed max-w-[620px] mt-5 mb-8">
+        If your teams spend more time coordinating work than delivering it, TalonOps gives planners, managers and engineers one live operational picture that scales from a handful of projects to thousands of concurrent activities.
+      </p>
+      <Button href="/contact" variant="product">Talk to us about TalonOps</Button>
+      <a href={withBase("/products")} class="inline-block mt-8 ml-1 font-mono text-[12px] text-product-bright hover:underline underline-offset-4 align-middle">← All products</a>
+    </div>
+  </section>
+</Base>

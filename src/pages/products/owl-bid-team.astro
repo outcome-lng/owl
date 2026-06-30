@@ -1,6 +1,8 @@
 ---
 import Base from "../../layouts/Base.astro";
 import { Button } from "../../components/Button";
+import Figure from "../../components/Figure.astro";
+import { withBase } from "../../utils/url";
 
 // OWL Bid Team - a member of the OWL suite with a rich dedicated page
 // (richer than the standard JTBD [slug] template). Content adapted from the
@@ -148,7 +150,19 @@ const infra = ["EU data residency throughout", "Per-tenant isolation in the data
 
   <!-- HOW THE AI WORKS -->
   <section class="mesh-spine relative overflow-hidden">
-    <div class="relative max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
+    <!-- Quality-gates whiteboard as a faint background; translucent navy mesh scrim keeps white text crisp -->
+    <img
+      src={withBase("/images/owl-bid-team-process-bg-1600.webp")}
+      srcset={`${withBase("/images/owl-bid-team-process-bg-1040.webp")} 1040w, ${withBase("/images/owl-bid-team-process-bg-1600.webp")} 1600w`}
+      sizes="100vw"
+      alt=""
+      aria-hidden="true"
+      width="1672"
+      height="941"
+      class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
+    />
+    <div class="absolute inset-0 mesh-spine opacity-[0.86]" aria-hidden="true"></div>
+    <div class="relative z-10 max-w-[1080px] mx-auto px-5 sm:px-6 py-16 md:py-20">
       <div class="max-w-[720px] mb-12">
         <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-product-bright mb-4">How the AI works</div>
         <h2 class="text-[26px] md:text-[34px] text-white">A separation of powers, the difference between persuasive and defensible.</h2>
@@ -214,6 +228,12 @@ const infra = ["EU data residency throughout", "Per-tenant isolation in the data
         <h2 class="text-[26px] md:text-[34px]">Eight specialists, one structured handover.</h2>
         <p class="text-[17px] text-muted leading-relaxed mt-5">Not a single chatbot, but a sequence of disciplines, each with its own brief, contributing decision-grade artefacts and handing off automatically.</p>
       </div>
+      <Figure
+        base="owl-bid-team-specialists"
+        alt="The OWL Bid Team specialists radiating from a central solution hub: Commercial, Writer, Solution Architect, AI Assistant, Security and Project Manager, working from a shared brief"
+        sizes="(min-width: 1080px) 1016px, 100vw"
+        class="mb-12 reveal"
+      />
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 reveal">
         {specialists.map((s) => (
           <div class="rounded-lg border border-line bg-surface p-5">

@@ -33,7 +33,7 @@ export function Logo({ tone = "light", size = "sm", className = "" }: LogoProps)
         loading="eager"
         decoding="async"
       />
-      <span className="inline-flex items-baseline gap-2">
+      <span className="inline-flex items-baseline gap-2 whitespace-nowrap">
         <span className={`font-sans ${wordSize} font-bold ${wordColor} tracking-tight`}>Outcome Works</span>
         <span className={`font-mono text-[10px] ${suffixColor} tracking-[0.14em]`}>Limited</span>
       </span>

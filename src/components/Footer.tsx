@@ -8,7 +8,7 @@ const consultLinks = [
 ];
 
 const productLinks = [
-  { name: "OWL Ops", path: "/products/owl-ops" },
+  { name: "TalonOps", path: "/products/talon-ops" },
   { name: "OWL Bid Team", path: "/products/owl-bid-team" },
   { name: "OWL Brain", path: "/products/owl-brain" },
   { name: "Tender Intel", path: "/products/tender-intel" },
@@ -27,7 +27,7 @@ export function Footer() {
   return (
     <footer className="bg-ink text-white/70">
       <div className="max-w-[1080px] mx-auto px-5 sm:px-6 py-16">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-[1.5fr_1fr_1fr_1fr] gap-10 md:gap-8">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <a href={withBase("/")} className="inline-block mb-4" aria-label="Outcome Works home">
